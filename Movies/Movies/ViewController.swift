@@ -5,6 +5,7 @@
 //  Created by Laura Pinheiro Marson on 16/03/22.
 //
 
+import Alamofire
 import UIKit
 
 class ViewController: UIViewController {

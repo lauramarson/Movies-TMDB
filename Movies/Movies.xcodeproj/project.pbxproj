@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		A4ACF5A827E25B0400E8F890 /* Movies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5A627E25B0400E8F890 /* Movies.xcdatamodeld */; };
 		A4ACF5AA27E25B0600E8F890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4ACF5A927E25B0600E8F890 /* Assets.xcassets */; };
 		A4ACF5AD27E25B0600E8F890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4ACF5AB27E25B0600E8F890 /* LaunchScreen.storyboard */; };
+		A4ACF5B527E2661400E8F890 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5B427E2661400E8F890 /* PrivateKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		A4ACF5A927E25B0600E8F890 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4ACF5AC27E25B0600E8F890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A4ACF5AE27E25B0600E8F890 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4ACF5B427E2661400E8F890 /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				A4ACF5AB27E25B0600E8F890 /* LaunchScreen.storyboard */,
 				A4ACF5AE27E25B0600E8F890 /* Info.plist */,
 				A4ACF5A627E25B0400E8F890 /* Movies.xcdatamodeld */,
+				A4ACF5B427E2661400E8F890 /* PrivateKey.swift */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -91,7 +94,6 @@
 				6312B06D3E5EC63497EF1046 /* Pods-Movies.debug.xcconfig */,
 				5D29BE610324B7EAEA457077 /* Pods-Movies.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -106,6 +108,7 @@
 				A4ACF59627E25B0400E8F890 /* Sources */,
 				A4ACF59727E25B0400E8F890 /* Frameworks */,
 				A4ACF59827E25B0400E8F890 /* Resources */,
+				30C34172064CFEBE27AF4F32 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -162,6 +165,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		30C34172064CFEBE27AF4F32 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Movies/Pods-Movies-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Movies/Pods-Movies-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Movies/Pods-Movies-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		80B23D89575F6D98F6EB00EA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -195,6 +215,7 @@
 				A4ACF59E27E25B0400E8F890 /* AppDelegate.swift in Sources */,
 				A4ACF5A827E25B0400E8F890 /* Movies.xcdatamodeld in Sources */,
 				A4ACF5A027E25B0400E8F890 /* SceneDelegate.swift in Sources */,
+				A4ACF5B527E2661400E8F890 /* PrivateKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
