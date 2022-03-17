@@ -16,6 +16,7 @@
 		A4ACF5AA27E25B0600E8F890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4ACF5A927E25B0600E8F890 /* Assets.xcassets */; };
 		A4ACF5AD27E25B0600E8F890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4ACF5AB27E25B0600E8F890 /* LaunchScreen.storyboard */; };
 		A4ACF5B527E2661400E8F890 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5B427E2661400E8F890 /* PrivateKey.swift */; };
+		A4ACF5B927E3BAF500E8F890 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5B827E3BAF500E8F890 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		A4ACF5AC27E25B0600E8F890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A4ACF5AE27E25B0600E8F890 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4ACF5B427E2661400E8F890 /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
+		A4ACF5B827E3BAF500E8F890 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				A4ACF5AE27E25B0600E8F890 /* Info.plist */,
 				A4ACF5A627E25B0400E8F890 /* Movies.xcdatamodeld */,
 				A4ACF5B427E2661400E8F890 /* PrivateKey.swift */,
+				A4ACF5B827E3BAF500E8F890 /* Movie.swift */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			files = (
 				A4ACF5A227E25B0400E8F890 /* ViewController.swift in Sources */,
 				A4ACF59E27E25B0400E8F890 /* AppDelegate.swift in Sources */,
+				A4ACF5B927E3BAF500E8F890 /* Movie.swift in Sources */,
 				A4ACF5A827E25B0400E8F890 /* Movies.xcdatamodeld in Sources */,
 				A4ACF5A027E25B0400E8F890 /* SceneDelegate.swift in Sources */,
 				A4ACF5B527E2661400E8F890 /* PrivateKey.swift in Sources */,
