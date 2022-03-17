@@ -7,6 +7,9 @@
 
 import Foundation
 
-class Movie: Codable {
-    
+struct Movie: Codable {
+    var title: String
+    var release_date: String
+    var vote_average: Float
+    var overview: String
 }

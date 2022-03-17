@@ -12,7 +12,7 @@ class ViewController: UITableViewController {
     lazy var searchBar: UISearchBar = UISearchBar()
     var movies = [Movie]()
     
-    var searchedMovies = [Movie]()
+    var searchText = ""
     var searching = false
 
     override func viewDidLoad() {
@@ -27,40 +27,39 @@ class ViewController: UITableViewController {
         
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
+
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searching {
-            return searchedMovies.count
-        } else {
-            return movies.count
-        }
+        return movies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Movie", for: indexPath)
-        // escrever detalhes da célula
+        let movie = movies[indexPath.row]
+        
+        cell.textLabel?.text = movie.title
+        cell.detailTextLabel?.text = movie.overview
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+        //
     }
     
 }
 
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        let filtered = movies.filter { movie in
-//
-//        }
+        self.searchText = searchText
         
-//        searchedMovies = filtered
-        searching = true
+        fetchMovies()
+        
         tableView.reloadData()
         
         if searchBar.text == "" {
-            searching = false
+            movies.removeAll(keepingCapacity: true)
             tableView.reloadData()
         }
     }
@@ -79,11 +78,26 @@ extension ViewController: UISearchBarDelegate {
     
     func resetSearchbar(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
-        searching = false
         searchBar.text = ""
+        movies.removeAll(keepingCapacity: true)
         tableView.reloadData()
         searchBar.resignFirstResponder()
     }
 
+}
+
+extension ViewController {
+  func fetchMovies() {
+    searchText.removeAll(where: {$0.isSymbol || $0.isPunctuation})
+    let words = searchText.replacingOccurrences(of: " ", with: "+")
+    
+    AF.request("https://api.themoviedb.org/3/search/movie?api_key=\(PrivateKey.key)&query=\(words)")
+      .validate()
+      .responseDecodable(of: Movies.self) { (response) in
+        guard let films = response.value else { return }
+        self.movies = films.results
+        self.tableView.reloadData()
+      }
+  }
 }
 
