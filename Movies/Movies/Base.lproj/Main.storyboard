@@ -53,15 +53,15 @@
             </objects>
             <point key="canvasLocation" x="4396" y="70"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="dQq-T2-gk2">
             <objects>
-                <viewController id="hhG-N8-hkB" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Detail" id="hhG-N8-hkB" customClass="DetailViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="jOW-C5-9ms">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOVIE TITLE XASXASD  ASKIDJASDLKASJDLAS SJDHSJDHFSDHFJKSDFH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0B5-Vz-ltM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOVIE TITLE XASXASD  ASKIDJASDLKASJDLAS SJDHSJDHFSDHFJKSDFH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0B5-Vz-ltM">
                                 <rect key="frame" x="10" y="74" width="384" height="71.666666666666686"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -74,8 +74,28 @@
                                     <constraint firstAttribute="width" constant="118" id="WUY-kE-5Ba"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ljt-c8-dv0">
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ljt-c8-dv0">
                                 <rect key="frame" x="153" y="175.66666666666663" width="241" height="184"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnH-OW-Cxa">
+                                        <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="54.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggc-49-5aQ">
+                                        <rect key="frame" x="0.0" y="64.666666666666686" width="41.333333333333336" height="54.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0l-k2-KfH">
+                                        <rect key="frame" x="0.0" y="129.33333333333334" width="41.333333333333336" height="54.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8b-lY-Txv">
                                 <rect key="frame" x="20" y="389.66666666666669" width="374" height="112"/>
@@ -94,6 +114,9 @@
                                 <state key="normal" title="Add to Favorites" image="star" catalog="system">
                                     <color key="titleColor" red="0.17576436352507596" green="0.54719187172069317" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="favoriteTapped:" destination="hhG-N8-hkB" eventType="touchUpInside" id="PCJ-Lr-hqc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NDb-AA-TLr"/>
@@ -115,10 +138,15 @@
                             <constraint firstItem="0B5-Vz-ltM" firstAttribute="top" secondItem="NDb-AA-TLr" secondAttribute="top" constant="30" id="tOb-ep-TZe"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="moviePoster" destination="NhJ-Rf-t70" id="fI3-sJ-spi"/>
+                        <outlet property="movieTitle" destination="0B5-Vz-ltM" id="99V-1c-2in"/>
+                        <outlet property="overview" destination="Q8b-lY-Txv" id="HLg-GE-YN0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I7c-7g-v8G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3685.507246376812" y="-698.4375"/>
+            <point key="canvasLocation" x="3929" y="-771"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ihw-qi-eYH">

@@ -19,7 +19,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         searchBar.searchBarStyle = UISearchBar.Style.prominent
-        searchBar.placeholder = " Search..."
+        searchBar.placeholder = " Search for a movie..."
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
         searchBar.backgroundImage = UIImage()
@@ -44,7 +44,11 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController else { return }
+
+        vc.movie = movies[indexPath.row]
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -68,10 +72,6 @@ extension ViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        resetSearchbar(searchBar)
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         resetSearchbar(searchBar)
     }
     
