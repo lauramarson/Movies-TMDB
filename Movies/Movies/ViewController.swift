@@ -39,7 +39,6 @@ class ViewController: UITableViewController {
         let movie = movies[indexPath.row]
         
         cell.textLabel?.text = movie.title
-        cell.detailTextLabel?.text = movie.overview
         
         return cell
     }
