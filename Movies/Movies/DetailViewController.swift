@@ -8,10 +8,17 @@
 import Alamofire
 import UIKit
 
+protocol DataDelegateProtocol: AnyObject {
+    func addFavorite(movie: Movie, poster: UIImage)
+    func delFavorite(_ movie: Movie)
+}
+
 class DetailViewController: UIViewController {
     @IBOutlet var movieTitle: UILabel!
     @IBOutlet var moviePoster: UIImageView!
     @IBOutlet var overview: UILabel!
+    
+    weak var delegate: DataDelegateProtocol?
     
     var movie: Movie?
     
@@ -26,17 +33,19 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func favoriteTapped(_ sender: Any) {
-        
+        guard let movie = movie else { return }
+        delegate?.addFavorite(movie: movie, poster: moviePoster.image ?? UIImage())
     }
     
     func fetchImage() {
-        AF.request("https://image.tmdb.org/t/p/w500\(movie!.poster_path)",method: .get).response { response in
+        guard let movie = movie else { return }
+        AF.request("https://image.tmdb.org/t/p/w500\(movie.poster_path)",method: .get).response { response in
             switch response.result {
                 case .success(let responseData):
-                    self.moviePoster.image = UIImage(data: responseData!, scale:1)
+                    self.moviePoster.image = UIImage(data: responseData ?? Data(), scale:1)
 
                 case .failure(let error):
-                    print("error--->",error)
+                    print("ERROR:",error)
             }
         }
     }
