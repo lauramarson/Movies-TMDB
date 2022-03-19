@@ -5,6 +5,7 @@
 //  Created by Laura Pinheiro Marson on 18/03/22.
 //
 
+import Alamofire
 import UIKit
 
 class DetailViewController: UIViewController {
@@ -21,9 +22,23 @@ class DetailViewController: UIViewController {
         
         movieTitle.text = movie.title
         overview.text = movie.overview
+        fetchImage()
     }
     
     @IBAction func favoriteTapped(_ sender: Any) {
+        
+    }
+    
+    func fetchImage() {
+        AF.request("https://image.tmdb.org/t/p/w500\(movie!.poster_path)",method: .get).response { response in
+            switch response.result {
+                case .success(let responseData):
+                    self.moviePoster.image = UIImage(data: responseData!, scale:1)
+
+                case .failure(let error):
+                    print("error--->",error)
+            }
+        }
     }
     
     /*
