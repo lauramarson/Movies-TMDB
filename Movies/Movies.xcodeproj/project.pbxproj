@@ -21,6 +21,7 @@
 		A4ACF5BD27E5143700E8F890 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5BC27E5143700E8F890 /* Genre.swift */; };
 		A4ACF5BF27E527EE00E8F890 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5BE27E527EE00E8F890 /* DetailViewController.swift */; };
 		A4ACF5C127E627C400E8F890 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5C027E627C400E8F890 /* FavoriteViewController.swift */; };
+		A4ACF5C327E62FA000E8F890 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5C227E62FA000E8F890 /* FavoriteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		A4ACF5BC27E5143700E8F890 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		A4ACF5BE27E527EE00E8F890 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A4ACF5C027E627C400E8F890 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		A4ACF5C227E62FA000E8F890 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				A4ACF5BC27E5143700E8F890 /* Genre.swift */,
 				A4ACF5BE27E527EE00E8F890 /* DetailViewController.swift */,
 				A4ACF5C027E627C400E8F890 /* FavoriteViewController.swift */,
+				A4ACF5C227E62FA000E8F890 /* FavoriteCell.swift */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				A4ACF5A227E25B0400E8F890 /* ViewController.swift in Sources */,
 				A4ACF59E27E25B0400E8F890 /* AppDelegate.swift in Sources */,
 				A4ACF5C127E627C400E8F890 /* FavoriteViewController.swift in Sources */,
+				A4ACF5C327E62FA000E8F890 /* FavoriteCell.swift in Sources */,
 				A4ACF5B927E3BAF500E8F890 /* Movie.swift in Sources */,
 				A4ACF5A827E25B0400E8F890 /* Movies.xcdatamodeld in Sources */,
 				A4ACF5A027E25B0400E8F890 /* SceneDelegate.swift in Sources */,

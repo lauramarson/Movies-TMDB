@@ -6,21 +6,16 @@
 //
 
 import Alamofire
+import CoreData
 import UIKit
-
-protocol DataDelegateProtocol: AnyObject {
-    func addFavorite(movie: Movie, poster: UIImage)
-    func delFavorite(_ movie: Movie)
-}
 
 class DetailViewController: UIViewController {
     @IBOutlet var movieTitle: UILabel!
     @IBOutlet var moviePoster: UIImageView!
     @IBOutlet var overview: UILabel!
     
-    weak var delegate: DataDelegateProtocol?
-    
     var movie: Movie?
+    var imageData = Data()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,20 +29,30 @@ class DetailViewController: UIViewController {
     
     @IBAction func favoriteTapped(_ sender: Any) {
         guard let movie = movie else { return }
-        delegate?.addFavorite(movie: movie, poster: moviePoster.image ?? UIImage())
+        save(movie: movie, image: imageData)
+
     }
     
-    func fetchImage() {
-        guard let movie = movie else { return }
-        AF.request("https://image.tmdb.org/t/p/w500\(movie.poster_path)",method: .get).response { response in
-            switch response.result {
-                case .success(let responseData):
-                    self.moviePoster.image = UIImage(data: responseData ?? Data(), scale:1)
+    func save(movie: Movie, image: Data) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
 
-                case .failure(let error):
-                    print("ERROR:",error)
-            }
-        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+
+        let entity = NSEntityDescription.entity(forEntityName: "FavoriteMovies", in: managedContext)!
+
+        let movieData = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        movieData.setValue(movie.id, forKeyPath: "id")
+        movieData.setValue(movie.title, forKeyPath: "title")
+        movieData.setValue(movie.overview, forKeyPath: "overview")
+        movieData.setValue(movie.release_date, forKeyPath: "releaseDate")
+        movieData.setValue(image, forKeyPath: "posterImage")
+        
+        do {
+            try managedContext.save()
+          } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+          }
     }
     
     /*
@@ -60,4 +65,20 @@ class DetailViewController: UIViewController {
     }
     */
 
+}
+
+extension DetailViewController {
+    func fetchImage() {
+        guard let movie = movie else { return }
+        AF.request("https://image.tmdb.org/t/p/w500\(movie.poster_path)",method: .get).response { response in
+            switch response.result {
+                case .success(let responseData):
+                    self.moviePoster.image = UIImage(data: responseData ?? Data(), scale:1)
+                    self.imageData = responseData ?? Data()
+                
+                case .failure(let error):
+                    print("ERROR:",error)
+            }
+        }
+    }
 }

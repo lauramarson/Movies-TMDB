@@ -5,13 +5,14 @@
 //  Created by Laura Pinheiro Marson on 19/03/22.
 //
 
+import CoreData
 import UIKit
 
 private let reuseIdentifier = "Favorite"
 
-class FavoriteViewController: UICollectionViewController, DataDelegateProtocol {
-    var favorites = [Movie]()
-    var posters = [UIImage]()
+class FavoriteViewController: UIViewController {
+    @IBOutlet var collectionView: UICollectionView!
+    var favorites = [NSManagedObject]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,23 +21,42 @@ class FavoriteViewController: UICollectionViewController, DataDelegateProtocol {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-        // Do any additional setup after loading the view.
+        fetchData()
     }
     
-    func addFavorite(movie: Movie, poster: UIImage) {
-        favorites.append(movie)
-        posters.append(poster)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//    }
     
-    func delFavorite(_ movie: Movie) {
-        for (index, favorite) in favorites.enumerated() {
-            if favorite.id == movie.id {
-                favorites.remove(at: index)
-                posters.remove(at: index)
-                break
-            }
+//    func addFavorite(movie: Movie, poster: UIImage) {
+//        favorites.append(movie)
+//        posters.append(poster)
+//    }
+//
+//    func delFavorite(_ movie: Movie) {
+//        for (index, favorite) in favorites.enumerated() {
+//            if favorite.id == movie.id {
+//                favorites.remove(at: index)
+//                posters.remove(at: index)
+//                break
+//            }
+//        }
+//    }
+    
+    func fetchData() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+          
+        let managedContext = appDelegate.persistentContainer.viewContext
+
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
+          
+        do {
+            favorites = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
 
@@ -52,24 +72,30 @@ class FavoriteViewController: UICollectionViewController, DataDelegateProtocol {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 1
+//    }
 
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return favorites.count
-    }
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of items
+//        return 1
+//    }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
-        return cell
-    }
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+////        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FavoriteCell else {
+////            fatalError("Unable to dequeue FavoriteCell.")
+////        }
+////        let movie = favorites[indexPath.row]
+////        if let posterData = movie.value(forKeyPath: "posterImage") as? Data {
+////            let posterImage = UIImage(data: posterData)
+////            cell.imageView.image = posterImage
+////        }
+//
+//        return cell
+//    }
 
     // MARK: UICollectionViewDelegate
 
@@ -103,3 +129,25 @@ class FavoriteViewController: UICollectionViewController, DataDelegateProtocol {
     */
 
 }
+
+extension FavoriteViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FavoriteCell else {
+            fatalError("Unable to dequeue FavoriteCell.")
+        }
+//        let movie = favorites[indexPath.row]
+//        if let posterData = movie.value(forKeyPath: "posterImage") as? Data {
+//            let posterImage = UIImage(data: posterData)
+//            cell.imageView.image = posterImage
+//        }
+        cell.backgroundColor = .green
+
+        return cell
+    }
+}
+    
