@@ -21,7 +21,7 @@ class FavoriteViewController: UIViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+//        collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         fetchData()
     }
@@ -132,7 +132,7 @@ class FavoriteViewController: UIViewController {
 
 extension FavoriteViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return favorites.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -140,11 +140,11 @@ extension FavoriteViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FavoriteCell else {
             fatalError("Unable to dequeue FavoriteCell.")
         }
-//        let movie = favorites[indexPath.row]
-//        if let posterData = movie.value(forKeyPath: "posterImage") as? Data {
-//            let posterImage = UIImage(data: posterData)
-//            cell.imageView.image = posterImage
-//        }
+        let movie = favorites[indexPath.row]
+        if let posterData = movie.value(forKeyPath: "posterImage") as? Data {
+            let posterImage = UIImage(data: posterData)
+            cell.imageView.image = posterImage
+        }
         cell.backgroundColor = .green
 
         return cell
