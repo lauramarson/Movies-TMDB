@@ -16,7 +16,8 @@ class FavoriteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        collectionView.delegate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -67,7 +68,9 @@ extension FavoriteViewController: UICollectionViewDataSource {
 
         return cell
     }
-    
+}
+
+extension FavoriteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let dvc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController else { return }
         let savedMovie = favorites[indexPath.row]
@@ -75,7 +78,8 @@ extension FavoriteViewController: UICollectionViewDataSource {
         dvc.movie = movie
         dvc.imageData = savedMovie.value(forKey: "poster_image") as! Data
         
-        navigationController?.pushViewController(dvc, animated: true)
+        self.present(dvc, animated: true)
+        //navigationController?.pushViewController(dvc, animated: true)
     }
     
     func convertMovie(movie: NSManagedObject) -> Movie {
@@ -89,7 +93,4 @@ extension FavoriteViewController: UICollectionViewDataSource {
         
         return convertedMovie
     }
-    
-    
 }
-    
