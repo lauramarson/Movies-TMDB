@@ -16,12 +16,3 @@ struct Movie: Codable {
     var overview: String
     var poster_path: String
 }
-
-struct Poster: Codable {
-    var poster_path: String
-    let image: Data
-    
-//    init(image: UIImage) {
-//        self.image = image.jpegData(compressionQuality: 0.8) ?? Data()
-//    }
-}

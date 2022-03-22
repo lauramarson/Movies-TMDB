@@ -24,7 +24,10 @@ class DetailViewController: UIViewController {
         
         movieTitle.text = movie.title
         overview.text = movie.overview
-        fetchImage()
+        if movie.poster_path != "" {
+            fetchImage()
+        }
+        moviePoster.image = UIImage(data: imageData, scale:1)
     }
     
     @IBAction func favoriteTapped(_ sender: Any) {
@@ -45,8 +48,9 @@ class DetailViewController: UIViewController {
         movieData.setValue(movie.id, forKeyPath: "id")
         movieData.setValue(movie.title, forKeyPath: "title")
         movieData.setValue(movie.overview, forKeyPath: "overview")
-        movieData.setValue(movie.release_date, forKeyPath: "releaseDate")
-        movieData.setValue(image, forKeyPath: "posterImage")
+        movieData.setValue(movie.release_date, forKeyPath: "release_date")
+        movieData.setValue(movie.vote_average, forKeyPath: "vote_average")
+        movieData.setValue(image, forKeyPath: "poster_image")
         
         do {
             try managedContext.save()
@@ -73,8 +77,8 @@ extension DetailViewController {
         AF.request("https://image.tmdb.org/t/p/w500\(movie.poster_path)",method: .get).response { response in
             switch response.result {
                 case .success(let responseData):
-                    self.moviePoster.image = UIImage(data: responseData ?? Data(), scale:1)
                     self.imageData = responseData ?? Data()
+                    self.moviePoster.image = UIImage(data: self.imageData, scale:1)
                 
                 case .failure(let error):
                     print("ERROR:",error)
