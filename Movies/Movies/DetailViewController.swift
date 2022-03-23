@@ -13,14 +13,29 @@ class DetailViewController: UIViewController {
     @IBOutlet var movieTitle: UILabel!
     @IBOutlet var moviePoster: UIImageView!
     @IBOutlet var overview: UILabel!
+    @IBOutlet var favButton: FavoriteButton!
     
     var movie: Movie?
     var imageData = Data()
+    
+    var favorite = false {
+        didSet {
+            favButton.favorite = favorite
+        }
+    }
+    
+    var managedContext: NSManagedObjectContext? {
+        (UIApplication.shared.delegate as? AppDelegate)?
+            .persistentContainer
+            .viewContext
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let movie = movie else { return }
+        
+        favButton.delegate = self
         
         movieTitle.text = movie.title
         overview.text = movie.overview
@@ -28,18 +43,39 @@ class DetailViewController: UIViewController {
             fetchImage()
         }
         moviePoster.image = UIImage(data: imageData, scale:1)
+        isFavorite(id: movie.id)
     }
     
-    @IBAction func favoriteTapped(_ sender: Any) {
-        guard let movie = movie else { return }
-        save(movie: movie, image: imageData)
+    func isFavorite(id: Int) {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
+        fetchRequest.fetchLimit =  1
+        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
+        
+        do {
+            let count = try managedContext?.count(for: fetchRequest)
+            if let count = count, count > 0 {
+                self.favorite = true
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+}
 
+extension DetailViewController: ActionDelegateProtocol {
+    func buttonTapped() {
+        if favorite {
+            //remover do core data
+            removeFavorite()
+        } else {
+            //add no core data
+            addFavorite()
+        }
+        favorite = !favorite
     }
     
-    func save(movie: Movie, image: Data) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-
-        let managedContext = appDelegate.persistentContainer.viewContext
+    func addFavorite() {
+        guard let movie = movie, let managedContext = managedContext else { return }
 
         let entity = NSEntityDescription.entity(forEntityName: "FavoriteMovies", in: managedContext)!
 
@@ -50,7 +86,7 @@ class DetailViewController: UIViewController {
         movieData.setValue(movie.overview, forKeyPath: "overview")
         movieData.setValue(movie.release_date, forKeyPath: "release_date")
         movieData.setValue(movie.vote_average, forKeyPath: "vote_average")
-        movieData.setValue(image, forKeyPath: "poster_image")
+        movieData.setValue(imageData, forKeyPath: "poster_image")
         
         do {
             try managedContext.save()
@@ -59,16 +95,9 @@ class DetailViewController: UIViewController {
           }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func removeFavorite() {
+        
     }
-    */
-
 }
 
 extension DetailViewController {
@@ -86,3 +115,5 @@ extension DetailViewController {
         }
     }
 }
+
+
