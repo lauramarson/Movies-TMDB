@@ -14,20 +14,26 @@ protocol ActionDelegateProtocol: AnyObject {
 class FavoriteButton: UIButton {
     weak var delegate: ActionDelegateProtocol?
     
-    var favorite = false {
+    
+    var favorite: Bool? {
         didSet {
+            guard let favorite = favorite else { return }
             if favorite {
-                setTitle("Remove from Favorites", for: .normal)
+                self.setTitle("Remove from Favorites", for: .normal)
             } else {
-                setTitle("Add to Favorites", for: .normal)
+                self.setTitle("Add to Favorites", for: .normal)
             }
+//            self.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         }
     }
     
-    @IBAction func favoriteTapped(_ sender: Any) {
-        self.delegate?.buttonTapped()
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }
     
-
-    
+    @objc func buttonAction() {
+        print("OIII")
+        self.delegate?.buttonTapped()
+    }
 }

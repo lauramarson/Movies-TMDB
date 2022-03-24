@@ -142,17 +142,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Xr-L9-JBh" customClass="FavoriteButton" customModule="Movies" customModuleProvider="target">
-                                <rect key="frame" x="137" y="521.66666666666663" width="140" height="38"/>
+                                <rect key="frame" x="131" y="521.66666666666663" width="152" height="38"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="NO8-el-3y1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Add to Favorites" image="star" catalog="system">
-                                    <color key="titleColor" red="0.17576436352507596" green="0.54719187172069317" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
+                                <state key="normal" title="Add to Favorites" image="star" catalog="system"/>
                                 <connections>
-                                    <action selector="favoriteTapped:" destination="h9q-2f-t2p" eventType="touchUpInside" id="q8q-92-USW"/>
+                                    <action selector="favoriteTapped:" destination="h9q-2f-t2p" eventType="touchUpInside" id="gtM-dk-QP9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -176,7 +173,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="favButton" destination="0Xr-L9-JBh" id="BOM-y3-7EU"/>
+                        <outlet property="favButton" destination="0Xr-L9-JBh" id="4ap-Zj-GyA"/>
                         <outlet property="moviePoster" destination="NhJ-Rf-t70" id="fI3-sJ-spi"/>
                         <outlet property="movieTitle" destination="0B5-Vz-ltM" id="99V-1c-2in"/>
                         <outlet property="overview" destination="Q8b-lY-Txv" id="HLg-GE-YN0"/>

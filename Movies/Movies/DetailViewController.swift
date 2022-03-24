@@ -14,12 +14,19 @@ class DetailViewController: UIViewController {
     @IBOutlet var moviePoster: UIImageView!
     @IBOutlet var overview: UILabel!
     @IBOutlet var favButton: FavoriteButton!
+    //    var favButton: FavoriteButton!
     
     var movie: Movie?
     var imageData = Data()
     
-    var favorite = false {
+    var favorite: Bool? {
         didSet {
+//            if favorite {
+//                favButton.setTitle("Remove from Favorites", for: .normal)
+//            } else {
+//                favButton.setTitle("Add to Favorites", for: .normal)
+//            }
+            guard let favorite = favorite else { return }
             favButton.favorite = favorite
         }
     }
@@ -44,6 +51,19 @@ class DetailViewController: UIViewController {
         }
         moviePoster.image = UIImage(data: imageData, scale:1)
         isFavorite(id: movie.id)
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(saveChanges), name: UIApplication.willResignActiveNotification, object: nil)
+    }
+    
+    @objc func saveChanges() {
+        guard let managedContext = managedContext else { return }
+        
+        do {
+            try managedContext.save()
+          } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+          }
     }
     
     func isFavorite(id: Int) {
@@ -53,25 +73,27 @@ class DetailViewController: UIViewController {
         
         do {
             let count = try managedContext?.count(for: fetchRequest)
-            if let count = count, count > 0 {
+            if let count = count, count == 1 {
                 self.favorite = true
+            } else {
+                self.favorite = false
             }
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        saveChanges()
+    }
 }
 
 extension DetailViewController: ActionDelegateProtocol {
     func buttonTapped() {
-        if favorite {
-            //remover do core data
-            removeFavorite()
-        } else {
-            //add no core data
-            addFavorite()
-        }
-        favorite = !favorite
+        guard let favorite = favorite else { return }
+        favorite ? removeFavorite() : addFavorite()
+
+        self.favorite = !favorite
     }
     
     func addFavorite() {
@@ -87,16 +109,26 @@ extension DetailViewController: ActionDelegateProtocol {
         movieData.setValue(movie.release_date, forKeyPath: "release_date")
         movieData.setValue(movie.vote_average, forKeyPath: "vote_average")
         movieData.setValue(imageData, forKeyPath: "poster_image")
-        
-        do {
-            try managedContext.save()
-          } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-          }
+//        do {
+//            try managedContext.save()
+//          } catch let error as NSError {
+//            print("Could not save. \(error), \(error.userInfo)")
+//          }
     }
     
     func removeFavorite() {
+        guard let movie = movie, let managedContext = managedContext else { return }
         
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
+        fetchRequest.fetchLimit =  1
+        fetchRequest.predicate = NSPredicate(format: "id == %d", movie.id)
+        
+        do {
+            let object = try managedContext.fetch(fetchRequest)
+            managedContext.delete(object[0])
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
     }
 }
 
