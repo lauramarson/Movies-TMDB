@@ -19,14 +19,6 @@ class FavoriteViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-//        collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-//        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +36,7 @@ class FavoriteViewController: UIViewController {
           
         do {
             favorites = try managedContext.fetch(fetchRequest)
+            print(try managedContext.fetch(fetchRequest))
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -57,7 +50,6 @@ extension FavoriteViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FavoriteCell else {
             fatalError("Unable to dequeue FavoriteCell.")
         }

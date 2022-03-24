@@ -18,7 +18,6 @@ class DetailViewController: UIViewController {
     @IBOutlet var moviePoster: UIImageView!
     @IBOutlet var overview: UILabel!
     @IBOutlet var favButton: FavoriteButton!
-    //    var favButton: FavoriteButton!
     
     weak var delegate: ReloadDataProtocol?
     
@@ -29,11 +28,6 @@ class DetailViewController: UIViewController {
     
     var favorite: Bool? {
         didSet {
-//            if favorite {
-//                favButton.setTitle("Remove from Favorites", for: .normal)
-//            } else {
-//                favButton.setTitle("Add to Favorites", for: .normal)
-//            }
             guard let favorite = favorite else { return }
             favButton.favorite = favorite
         }
@@ -134,11 +128,12 @@ extension DetailViewController: ActionDelegateProtocol {
         guard let movie = movie, let managedContext = managedContext else { return }
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
-        fetchRequest.fetchLimit =  1
+//        fetchRequest.fetchLimit =  1
         fetchRequest.predicate = NSPredicate(format: "id == %d", movie.id)
         
         do {
             let object = try managedContext.fetch(fetchRequest)
+            print(object)
             managedContext.delete(object[0])
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
