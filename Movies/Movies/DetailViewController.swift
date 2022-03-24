@@ -9,6 +9,10 @@ import Alamofire
 import CoreData
 import UIKit
 
+protocol ReloadDataProtocol: AnyObject {
+    func update(favorite: Bool, indexPath: Int)
+}
+
 class DetailViewController: UIViewController {
     @IBOutlet var movieTitle: UILabel!
     @IBOutlet var moviePoster: UIImageView!
@@ -16,6 +20,10 @@ class DetailViewController: UIViewController {
     @IBOutlet var favButton: FavoriteButton!
     //    var favButton: FavoriteButton!
     
+    weak var delegate: ReloadDataProtocol?
+    
+    var fromFavoriteVC = false
+    var indexPath: Int?
     var movie: Movie?
     var imageData = Data()
     
@@ -84,7 +92,13 @@ class DetailViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         saveChanges()
+        if fromFavoriteVC {
+            fromFavoriteVC = false
+            guard let favorite = favorite, let indexPath = indexPath else { return }
+            self.delegate?.update(favorite: favorite, indexPath: indexPath)
+        }
     }
 }
 

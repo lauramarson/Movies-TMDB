@@ -19,6 +19,7 @@ class FavoriteViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -78,9 +79,11 @@ extension FavoriteViewController: UICollectionViewDelegate {
         let movie = convertMovie(movie: savedMovie)
         dvc.movie = movie
         dvc.imageData = savedMovie.value(forKey: "poster_image") as! Data
+        dvc.delegate = self
+        dvc.indexPath = indexPath.row
+        dvc.fromFavoriteVC = true
         
         self.present(dvc, animated: true)
-        //navigationController?.pushViewController(dvc, animated: true)
     }
     
     func convertMovie(movie: NSManagedObject) -> Movie {
@@ -93,5 +96,14 @@ extension FavoriteViewController: UICollectionViewDelegate {
         let convertedMovie = Movie(id: id, title: title, release_date: release_date, genre_ids: [], vote_average: vote_average, overview: overview, poster_path: "")
         
         return convertedMovie
+    }
+}
+
+extension FavoriteViewController: ReloadDataProtocol {
+    func update(favorite: Bool, indexPath: Int) {
+        guard favorite == false else { return }
+        
+        favorites.remove(at: indexPath)
+        collectionView.reloadData()
     }
 }
