@@ -25,6 +25,7 @@ class DetailViewController: UIViewController {
     var indexPath: Int?
     var movie: Movie?
     var imageData = Data()
+    var genres = ""
     
     var favorite: Bool? {
         didSet {
@@ -53,6 +54,8 @@ class DetailViewController: UIViewController {
         }
         moviePoster.image = UIImage(data: imageData, scale:1)
         isFavorite(id: movie.id)
+        genreNames()
+        print(genres)
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(saveChanges), name: UIApplication.willResignActiveNotification, object: nil)
@@ -117,8 +120,6 @@ extension DetailViewController: ActionDelegateProtocol {
 
         let movieData = NSManagedObject(entity: entity, insertInto: managedContext)
         
-        let genres = genreNames(movie: movie, managedContext: managedContext)
-        
         movieData.setValue(movie.id, forKeyPath: "id")
         movieData.setValue(movie.title, forKeyPath: "title")
         movieData.setValue(movie.overview, forKeyPath: "overview")
@@ -149,8 +150,10 @@ extension DetailViewController: ActionDelegateProtocol {
         }
     }
     
-    func genreNames(movie: Movie, managedContext: NSManagedObjectContext) -> [String] {
+    func genreNames() {
+        guard let movie = movie, let managedContext = managedContext else { return }
         var genreNames = [String]()
+        var genresString = ""
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
         
@@ -165,11 +168,13 @@ extension DetailViewController: ActionDelegateProtocol {
                 let name = genre.value(forKey: "name") as! String
                 genreNames.append(name)
             }
+            
+            genresString = genreNames.joined(separator: ", ")
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         
-        return genreNames
+        genres = genresString
     }
 }
 
