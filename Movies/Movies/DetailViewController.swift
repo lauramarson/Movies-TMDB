@@ -117,11 +117,14 @@ extension DetailViewController: ActionDelegateProtocol {
 
         let movieData = NSManagedObject(entity: entity, insertInto: managedContext)
         
+        let genres = genreNames(movie: movie, managedContext: managedContext)
+        
         movieData.setValue(movie.id, forKeyPath: "id")
         movieData.setValue(movie.title, forKeyPath: "title")
         movieData.setValue(movie.overview, forKeyPath: "overview")
         movieData.setValue(movie.release_date, forKeyPath: "release_date")
         movieData.setValue(movie.vote_average, forKeyPath: "vote_average")
+        movieData.setValue(genres, forKeyPath: "genres")
         movieData.setValue(imageData, forKeyPath: "poster_image")
 //        do {
 //            try managedContext.save()
@@ -144,6 +147,29 @@ extension DetailViewController: ActionDelegateProtocol {
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+    }
+    
+    func genreNames(movie: Movie, managedContext: NSManagedObjectContext) -> [String] {
+        var genreNames = [String]()
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
+        
+        for id in movie.genre_ids {
+            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
+        }
+        
+        do {
+            let genres = try managedContext.fetch(fetchRequest)
+            
+            for genre in genres {
+                let name = genre.value(forKey: "name") as! String
+                genreNames.append(name)
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        return genreNames
     }
 }
 

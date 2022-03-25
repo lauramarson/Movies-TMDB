@@ -8,5 +8,5 @@
 import UIKit
 
 struct Genres: Codable {
-    var results: [Genre]
+    var genres: [Genre]
 }

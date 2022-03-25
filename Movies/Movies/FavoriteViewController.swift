@@ -38,7 +38,6 @@ class FavoriteViewController: UIViewController {
           
         do {
             favorites = try managedContext.fetch(fetchRequest)
-            print(try managedContext.fetch(fetchRequest))
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }

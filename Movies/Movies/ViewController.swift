@@ -34,10 +34,10 @@ class ViewController: UITableViewController {
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         
-        if UIApplication.isFirstLaunch() {
+        if isFirstLaunch() {
             fetchGenres()
         }
-
+        print(genres)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,18 +63,18 @@ class ViewController: UITableViewController {
     
     func saveGenres() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-          
+
         let managedContext = appDelegate.persistentContainer.viewContext
 
         let entity = NSEntityDescription.entity(forEntityName: "MovieGenres", in: managedContext)!
-        
+
         for genre in genres {
             let genreData = NSManagedObject(entity: entity, insertInto: managedContext)
-            
+
             genreData.setValue(genre.id, forKeyPath: "id")
             genreData.setValue(genre.name, forKeyPath: "name")
         }
-        
+
         do {
             try managedContext.save()
         } catch let error as NSError {
@@ -135,20 +135,34 @@ extension ViewController {
             .validate()
             .responseDecodable(of: Genres.self) { [weak self] (response) in
                 guard let genres = response.value else { return }
-                self?.genres = genres.results
+                self?.genres = genres.genres
                 self?.saveGenres()
             }
     }
 }
 
-extension UIApplication {
-    class func isFirstLaunch() -> Bool {
-        if !UserDefaults.standard.bool(forKey: "hasBeenLaunchedBeforeFlag") {
-            UserDefaults.standard.set(true, forKey: "hasBeenLaunchedBeforeFlag")
-            UserDefaults.standard.synchronize()
+//extension UIApplication {
+//    class func isFirstLaunch() -> Bool {
+//        if !UserDefaults.standard.bool(forKey: "hasBeenLaunchedBeforeFlag") {
+//            UserDefaults.standard.set(true, forKey: "hasBeenLaunchedBeforeFlag")
+//            UserDefaults.standard.synchronize()
+//            return true
+//        }
+//        return false
+//    }
+//}
+
+extension ViewController {
+    func isFirstLaunch() -> Bool {
+        let defaults = UserDefaults.standard
+        if let _ = defaults.string(forKey: "isAppAlreadyLaunchedOnce") {
+            print("App already launched")
+            return false
+        } else {
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
             return true
         }
-        return false
     }
 }
 
