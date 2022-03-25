@@ -6,11 +6,17 @@
 //
 
 import Alamofire
+import CoreData
 import UIKit
 
 class ViewController: UITableViewController {
     lazy var searchBar: UISearchBar = UISearchBar()
     var movies = [Movie]()
+    var genres = [Genre]() {
+        didSet {
+            saveGenres()
+        }
+    }
     
     var searchText = ""
     var searching = false
@@ -27,6 +33,10 @@ class ViewController: UITableViewController {
         
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
+        
+        if UIApplication.isFirstLaunch() {
+            fetchGenres()
+        }
 
     }
     
@@ -49,6 +59,27 @@ class ViewController: UITableViewController {
         dvc.movie = movies[indexPath.row]
         
         navigationController?.pushViewController(dvc, animated: true)
+    }
+    
+    func saveGenres() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+          
+        let managedContext = appDelegate.persistentContainer.viewContext
+
+        let entity = NSEntityDescription.entity(forEntityName: "MovieGenres", in: managedContext)!
+        
+        for genre in genres {
+            let genreData = NSManagedObject(entity: entity, insertInto: managedContext)
+            
+            genreData.setValue(genre.id, forKeyPath: "id")
+            genreData.setValue(genre.name, forKeyPath: "name")
+        }
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
 }
@@ -86,17 +117,38 @@ extension ViewController: UISearchBarDelegate {
 }
 
 extension ViewController {
-  func fetchMovies() {
-    searchText.removeAll(where: {$0.isSymbol || $0.isPunctuation})
-    let words = searchText.replacingOccurrences(of: " ", with: "+")
+    func fetchMovies() {
+        searchText.removeAll(where: {$0.isSymbol || $0.isPunctuation})
+        let words = searchText.replacingOccurrences(of: " ", with: "+")
     
-    AF.request("https://api.themoviedb.org/3/search/movie?api_key=\(PrivateKey.key)&query=\(words)")
-      .validate()
-      .responseDecodable(of: Movies.self) { (response) in
-        guard let films = response.value else { return }
-        self.movies = films.results
-        self.tableView.reloadData()
-      }
-  }
+        AF.request("https://api.themoviedb.org/3/search/movie?api_key=\(PrivateKey.key)&query=\(words)")
+            .validate()
+            .responseDecodable(of: Movies.self) { [weak self] (response) in
+                guard let films = response.value else { return }
+                self?.movies = films.results
+                self?.tableView.reloadData()
+            }
+    }
+    
+    func fetchGenres() {
+        AF.request("https://api.themoviedb.org/3/genre/movie/list?api_key=\(PrivateKey.key)&language=en-US")
+            .validate()
+            .responseDecodable(of: Genres.self) { [weak self] (response) in
+                guard let genres = response.value else { return }
+                self?.genres = genres.results
+                self?.saveGenres()
+            }
+    }
+}
+
+extension UIApplication {
+    class func isFirstLaunch() -> Bool {
+        if !UserDefaults.standard.bool(forKey: "hasBeenLaunchedBeforeFlag") {
+            UserDefaults.standard.set(true, forKey: "hasBeenLaunchedBeforeFlag")
+            UserDefaults.standard.synchronize()
+            return true
+        }
+        return false
+    }
 }
 

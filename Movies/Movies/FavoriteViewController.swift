@@ -19,6 +19,8 @@ class FavoriteViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+//        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

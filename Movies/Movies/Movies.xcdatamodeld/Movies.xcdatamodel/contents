@@ -8,7 +8,12 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="vote_average" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="MovieGenres" representedClassName="MovieGenres" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+    </entity>
     <elements>
         <element name="FavoriteMovies" positionX="415.45703125" positionY="-64.953125" width="128" height="119"/>
+        <element name="MovieGenres" positionX="441" positionY="0" width="128" height="59"/>
     </elements>
 </model>
