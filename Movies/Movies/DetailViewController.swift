@@ -94,6 +94,12 @@ class DetailViewController: UIViewController {
             self.delegate?.update(favorite: favorite, indexPath: indexPath)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let movie = movie else { return }
+        isFavorite(id: movie.id)
+    }
 }
 
 extension DetailViewController: ActionDelegateProtocol {
