@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Movie: Codable {
+struct Movie: Codable { //TODO codingkey
     var id: Int
     var title: String
     var release_date: String
@@ -15,4 +15,5 @@ struct Movie: Codable {
     var vote_average: Float
     var overview: String
     var poster_path: String
+    var genre_names: String?
 }

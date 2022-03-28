@@ -47,12 +47,12 @@ class FavoriteViewController: UIViewController {
 
 extension FavoriteViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favorites.count
+        favorites.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? FavoriteCell else {
-            fatalError("Unable to dequeue FavoriteCell.")
+            return UICollectionViewCell()
         }
         let movie = favorites[indexPath.row]
         if let posterData = movie.value(forKeyPath: "poster_image") as? Data {
@@ -71,7 +71,7 @@ extension FavoriteViewController: UICollectionViewDelegate {
         let savedMovie = favorites[indexPath.row]
         let movie = convertMovie(movie: savedMovie)
         dvc.movie = movie
-        dvc.imageData = savedMovie.value(forKey: "poster_image") as! Data
+        dvc.imageData = savedMovie.value(forKey: "poster_image") as! Data //TODO
         dvc.delegate = self
         dvc.indexPath = indexPath.row
         dvc.fromFavoriteVC = true
@@ -79,15 +79,15 @@ extension FavoriteViewController: UICollectionViewDelegate {
         self.present(dvc, animated: true)
     }
     
-    func convertMovie(movie: NSManagedObject) -> Movie {
+    func convertMovie(movie: NSManagedObject) -> Movie { //TODO
         let id = movie.value(forKey: "id") as! Int
         let title = movie.value(forKey: "title") as! String
         let overview = movie.value(forKey: "overview") as! String
         let release_date = movie.value(forKey: "release_date") as! String
         let vote_average = movie.value(forKey: "vote_average") as! Float
+        let genre_names = movie.value(forKey: "genres") as! String
         
-        let convertedMovie = Movie(id: id, title: title, release_date: release_date, genre_ids: [], vote_average: vote_average, overview: overview, poster_path: "")
-        
+        let convertedMovie = Movie(id: id, title: title, release_date: release_date, genre_ids: [], vote_average: vote_average, overview: overview, poster_path: "", genre_names: genre_names)
         return convertedMovie
     }
 }

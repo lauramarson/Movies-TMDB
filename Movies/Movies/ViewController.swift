@@ -34,9 +34,9 @@ class ViewController: UITableViewController {
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         
-        if isFirstLaunch() {
-            fetchGenres()
-        }
+        guard isFirstLaunch else { return }
+        fetchGenres()
+        
         print(genres)
     }
     
@@ -68,7 +68,7 @@ class ViewController: UITableViewController {
 
         let entity = NSEntityDescription.entity(forEntityName: "MovieGenres", in: managedContext)!
 
-        for genre in genres {
+        for genre in genres { //TODO: for each
             let genreData = NSManagedObject(entity: entity, insertInto: managedContext)
 
             genreData.setValue(genre.id, forKeyPath: "id")
@@ -89,13 +89,12 @@ extension ViewController: UISearchBarDelegate {
         self.searchText = searchText
         
         fetchMovies()
-        
-        tableView.reloadData()
-        
+
         if searchBar.text == "" {
             movies.removeAll(keepingCapacity: true)
-            tableView.reloadData()
+//            tableView.reloadData()
         }
+        tableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -153,16 +152,25 @@ extension ViewController {
 //}
 
 extension ViewController {
-    func isFirstLaunch() -> Bool {
+    var isFirstLaunch: Bool {
         let defaults = UserDefaults.standard
-        if let _ = defaults.string(forKey: "isAppAlreadyLaunchedOnce") {
-            print("App already launched")
-            return false
-        } else {
+        
+        guard defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil else {
             defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
-            print("App launched first time")
             return true
         }
+        
+        return false
+        
+        
+//        if let _ = defaults.string(forKey: "isAppAlreadyLaunchedOnce") {
+//            print("App already launched")
+//            return false
+//        } else {
+//            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+//            print("App launched first time")
+//            return true
+//        }
     }
 }
 

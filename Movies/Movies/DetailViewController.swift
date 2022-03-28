@@ -18,6 +18,8 @@ class DetailViewController: UIViewController {
     @IBOutlet var moviePoster: UIImageView!
     @IBOutlet var overview: UILabel!
     @IBOutlet var favButton: FavoriteButton!
+    @IBOutlet var genresLabel: UILabel!
+    @IBOutlet var voteAverageLabel: UILabel!
     
     weak var delegate: ReloadDataProtocol?
     
@@ -49,16 +51,32 @@ class DetailViewController: UIViewController {
         
         movieTitle.text = movie.title
         overview.text = movie.overview
+        
         if movie.poster_path != "" {
             fetchImage()
         }
         moviePoster.image = UIImage(data: imageData, scale:1)
-        isFavorite(id: movie.id)
+        
+        setFavorite(id: movie.id)
+        
         genreNames()
-        print(genres)
+
+        setLabels()
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(saveChanges), name: UIApplication.willResignActiveNotification, object: nil)
+    }
+    
+    func setLabels() {
+        guard let movie = movie else { return }
+        
+        genresLabel.text = """
+        Genres
+        \(movie.genre_names ?? "")
+        """
+        
+        voteAverageLabel.text = "\(String(movie.vote_average))/10"
+        
     }
     
     @objc func saveChanges() {
@@ -71,18 +89,15 @@ class DetailViewController: UIViewController {
           }
     }
     
-    func isFavorite(id: Int) {
+    func setFavorite(id: Int) {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
         fetchRequest.fetchLimit =  1
         fetchRequest.predicate = NSPredicate(format: "id == %d", id)
         
         do {
             let count = try managedContext?.count(for: fetchRequest)
-            if let count = count, count == 1 {
-                self.favorite = true
-            } else {
-                self.favorite = false
-            }
+            self.favorite = (count == 1)
+            
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -91,7 +106,7 @@ class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         saveChanges()
-        if fromFavoriteVC {
+        if fromFavoriteVC { //TODO
             fromFavoriteVC = false
             guard let favorite = favorite, let indexPath = indexPath else { return }
             self.delegate?.update(favorite: favorite, indexPath: indexPath)
@@ -101,7 +116,7 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let movie = movie else { return }
-        isFavorite(id: movie.id)
+        setFavorite(id: movie.id)
     }
 }
 
@@ -141,7 +156,7 @@ extension DetailViewController: ActionDelegateProtocol {
 //        fetchRequest.fetchLimit =  1
         fetchRequest.predicate = NSPredicate(format: "id == %d", movie.id)
         
-        do {
+        do { //******
             let object = try managedContext.fetch(fetchRequest)
             print(object)
             managedContext.delete(object[0])
@@ -152,36 +167,26 @@ extension DetailViewController: ActionDelegateProtocol {
     
     func genreNames() {
         guard let movie = movie, let managedContext = managedContext else { return }
-        var genreNames = [String]()
-        var genresString = ""
         
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieGenres")
         
-        for id in movie.genre_ids {
-            fetchRequest.predicate = NSPredicate(format: "id == %d", id)
+        let genreNames: [String] = movie.genre_ids.compactMap { genreID in
+            fetchRequest.predicate = NSPredicate(format: "id == %d", genreID)
+            return try?
+                managedContext.fetch(fetchRequest)
+                .first?
+                .value(forKey: "name") as? String
         }
-        
-        do {
-            let genres = try managedContext.fetch(fetchRequest)
-            
-            for genre in genres {
-                let name = genre.value(forKey: "name") as! String
-                genreNames.append(name)
-            }
-            
-            genresString = genreNames.joined(separator: ", ")
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        genres = genresString
+
+        self.movie?.genre_names = genreNames.joined(separator: ", ")
     }
 }
 
 extension DetailViewController {
     func fetchImage() {
         guard let movie = movie else { return }
-        AF.request("https://image.tmdb.org/t/p/w500\(movie.poster_path)",method: .get).response { response in
+        AF.request("https://image.tmdb.org/t/p/w500\(movie.poster_path)",method: .get).response { [weak self] response in
+            guard let self = self else { return }
             switch response.result {
                 case .success(let responseData):
                     self.imageData = responseData ?? Data()

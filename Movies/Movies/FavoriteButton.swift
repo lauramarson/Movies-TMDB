@@ -33,7 +33,6 @@ class FavoriteButton: UIButton {
     }
     
     @objc func buttonAction() {
-        print("OIII")
-        self.delegate?.buttonTapped()
+        delegate?.buttonTapped()
     }
 }
