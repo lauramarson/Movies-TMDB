@@ -20,6 +20,7 @@ class DetailViewController: UIViewController {
     @IBOutlet var favButton: FavoriteButton!
     @IBOutlet var genresLabel: UILabel!
     @IBOutlet var voteAverageLabel: UILabel!
+    @IBOutlet var releaseYear: UILabel!
     
     weak var delegate: ReloadDataProtocol?
     
@@ -77,6 +78,10 @@ class DetailViewController: UIViewController {
         """
         
         voteAverageLabel.text = "\(String(movie.vote_average))/10"
+        
+        
+        let yearString = String(movie.release_date.prefix(4))
+        releaseYear.text = yearString
         
     }
     
