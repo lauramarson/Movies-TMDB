@@ -16,7 +16,7 @@ protocol ReloadDataProtocol: AnyObject {
 class DetailViewController: UIViewController {
     @IBOutlet var movieTitle: UILabel!
     @IBOutlet var moviePoster: UIImageView!
-    @IBOutlet var overview: UILabel!
+    @IBOutlet var overview: UITextView!
     @IBOutlet var favButton: FavoriteButton!
     @IBOutlet var genresLabel: UILabel!
     @IBOutlet var voteAverageLabel: UILabel!
@@ -51,6 +51,7 @@ class DetailViewController: UIViewController {
         
         movieTitle.text = movie.title
         overview.text = movie.overview
+        overview.flashScrollIndicators()
         
         if movie.poster_path != "" {
             fetchImage()
