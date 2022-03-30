@@ -27,7 +27,6 @@ class DetailViewController: UIViewController {
     var indexPath: Int?
     var movie: Movie?
     var imageData = Data()
-    var genres = ""
     
     var favorite: Bool? {
         didSet {
@@ -59,7 +58,9 @@ class DetailViewController: UIViewController {
         
         setFavorite(id: movie.id)
         
-        genreNames()
+        if !fromFavoriteVC {
+            genreNames()
+        }
 
         setLabels()
         
@@ -140,7 +141,7 @@ extension DetailViewController: ActionDelegateProtocol {
         movieData.setValue(movie.overview, forKeyPath: "overview")
         movieData.setValue(movie.release_date, forKeyPath: "release_date")
         movieData.setValue(movie.vote_average, forKeyPath: "vote_average")
-        movieData.setValue(genres, forKeyPath: "genres")
+        movieData.setValue(movie.genre_names, forKeyPath: "genres")
         movieData.setValue(imageData, forKeyPath: "poster_image")
 //        do {
 //            try managedContext.save()
