@@ -58,8 +58,10 @@ extension FavoriteViewController: UICollectionViewDataSource {
         if let posterData = movie.value(forKeyPath: "poster_image") as? Data {
             let posterImage = UIImage(data: posterData)
             cell.imageView.image = posterImage
+//            cell.imageView.layer.cornerRadius = 20
         }
-        cell.backgroundColor = .green
+        
+        cell.layer.cornerRadius = 5
 
         return cell
     }
