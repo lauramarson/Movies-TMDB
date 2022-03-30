@@ -62,8 +62,8 @@
             filePath = "Movies/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "genreNames()"
             landmarkType = "7">
          </BreakpointContent>
@@ -112,8 +112,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
-            landmarkName = "imageData"
-            landmarkType = "24">
+            landmarkName = "DetailViewController"
+            landmarkType = "3">
             <Locations>
                <Location
                   uuid = "84D04034-5376-4466-97CD-152BAEC88925 - e93d58b8de93b566"

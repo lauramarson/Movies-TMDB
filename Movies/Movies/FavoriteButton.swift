@@ -19,9 +19,9 @@ class FavoriteButton: UIButton {
         didSet {
             guard let favorite = favorite else { return }
             if favorite {
-                self.setTitle("Remove from Favorites", for: .normal)
+                self.setTitle(" Remove from Favorites ", for: .normal)
             } else {
-                self.setTitle("Add to Favorites", for: .normal)
+                self.setTitle(" Add to Favorites ", for: .normal)
             }
 //            self.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         }
