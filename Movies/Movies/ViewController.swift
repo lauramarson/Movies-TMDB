@@ -24,6 +24,8 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UINib(nibName: "MovieTableViewCell", bundle: nil), forCellReuseIdentifier: "Movie")
+        
         searchBar.searchBarStyle = UISearchBar.Style.prominent
         searchBar.placeholder = " Search for a movie..."
         searchBar.sizeToFit()
@@ -45,10 +47,15 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Movie", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Movie", for: indexPath) as? MovieTableViewCell else {
+            return UITableViewCell()
+        }
         let movie = movies[indexPath.row]
         
-        cell.textLabel?.text = movie.title
+        cell.movieTitle.text = movie.title
+        
+        let yearString = String(movie.release_date.prefix(4))
+        cell.releaseYear.text = yearString
         
         return cell
     }
