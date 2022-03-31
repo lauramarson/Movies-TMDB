@@ -82,8 +82,7 @@ class DetailViewController: UIViewController {
         
         
         let yearString = String(movie.release_date.prefix(4))
-        releaseYear.text = yearString
-  
+        releaseYear.text = yearString  
     }
     
     @objc func saveChanges() {

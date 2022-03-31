@@ -30,8 +30,8 @@
             filePath = "Movies/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "fetchGenres()"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "Movies/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "fetchGenres()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,10 +62,10 @@
             filePath = "Movies/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "DetailViewController"
-            landmarkType = "21">
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "genreNames()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -116,7 +116,7 @@
             landmarkType = "3">
             <Locations>
                <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - e93d58b8de93b566"
+                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - e93d58b8de93b547"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -126,12 +126,12 @@
                   urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "296">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "332">
                </Location>
                <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 5210f03ab1744352"
+                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 5210f03ab1744373"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -141,9 +141,9 @@
                   urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "316">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "352">
                </Location>
                <Location
                   uuid = "84D04034-5376-4466-97CD-152BAEC88925 - cad74372e95d5401"
@@ -161,7 +161,7 @@
                   offsetFromSymbolStart = "16">
                </Location>
                <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 82b0feb26c6e02e0"
+                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 82b0feb26c6e02c1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -171,12 +171,12 @@
                   urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
                   offsetFromSymbolStart = "12">
                </Location>
                <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 154d62d04de3960d"
+                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 154d62d04de3962c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -186,12 +186,12 @@
                   urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "496">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "536">
                </Location>
                <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 9eba937ffdd25907"
+                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 9eba937ffdd25926"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -201,9 +201,9 @@
                   urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "472">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "512">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -221,6 +221,102 @@
             startingLineNumber = "76"
             endingLineNumber = "76"
             landmarkName = "setLabels()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E0701A77-16B0-4ED4-B40B-CC1A53A5CE7E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movies/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "ViewController"
+            landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "04494173-1FD5-4825-94A4-637812722617"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movies/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "ViewController"
+            landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5C6E5883-818A-4833-90CE-AE32F281CB95"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movies/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "ViewController"
+            landmarkType = "21">
+            <Locations>
+               <Location
+                  uuid = "5C6E5883-818A-4833-90CE-AE32F281CB95 - 669a2c3f3f6b5690"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Movies.ViewController.fetchImage() -&gt; ()"
+                  moduleName = "Movies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "724">
+               </Location>
+               <Location
+                  uuid = "5C6E5883-818A-4833-90CE-AE32F281CB95 - dad8cbd0f95fbc53"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in Movies.ViewController.fetchImage() -&gt; ()"
+                  moduleName = "Movies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "188">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91EAFCD4-F306-4EFD-B805-E24BEF51C307"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movies/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

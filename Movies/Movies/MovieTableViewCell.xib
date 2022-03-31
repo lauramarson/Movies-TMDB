@@ -12,16 +12,10 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Movie" rowHeight="141" id="KGk-i7-Jjw" customClass="MovieTableViewCell" customModule="Movies" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="294.5" height="85"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fea-gr-rzf">
-                        <rect key="frame" x="6" y="0.0" width="53" height="85"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="53" id="NcC-Ab-FfM"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title askidjkdsfjdsf sdlfkjsdklf sdkfjskdlfj sdkfjsdjlkfjsd boi sdasdasdasd" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNJ-nc-p3v">
                         <rect key="frame" x="69" y="10" width="215.5" height="39.5"/>
                         <fontDescription key="fontDescription" name="NotoSansOriya-Bold" family="Noto Sans Oriya" pointSize="14"/>
@@ -34,16 +28,23 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fea-gr-rzf">
+                        <rect key="frame" x="6" y="5" width="55" height="74"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="74" id="BZh-9G-8QN"/>
+                            <constraint firstAttribute="width" constant="55" id="NcC-Ab-FfM"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wGj-CK-zn6" secondAttribute="bottom" constant="5" id="4Nd-AO-esU"/>
-                    <constraint firstItem="pNJ-nc-p3v" firstAttribute="leading" secondItem="fea-gr-rzf" secondAttribute="trailing" constant="10" id="577-w4-L1H"/>
-                    <constraint firstItem="wGj-CK-zn6" firstAttribute="leading" secondItem="fea-gr-rzf" secondAttribute="trailing" constant="10" id="8nU-KN-XTc"/>
+                    <constraint firstItem="pNJ-nc-p3v" firstAttribute="leading" secondItem="fea-gr-rzf" secondAttribute="trailing" constant="8" id="577-w4-L1H"/>
+                    <constraint firstItem="wGj-CK-zn6" firstAttribute="leading" secondItem="fea-gr-rzf" secondAttribute="trailing" constant="8" id="8nU-KN-XTc"/>
                     <constraint firstAttribute="trailing" secondItem="pNJ-nc-p3v" secondAttribute="trailing" constant="10" id="BFT-rJ-3OB"/>
                     <constraint firstItem="pNJ-nc-p3v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Cpv-kg-PtD"/>
-                    <constraint firstAttribute="bottom" secondItem="fea-gr-rzf" secondAttribute="bottom" id="hH2-5I-dAs"/>
+                    <constraint firstAttribute="bottom" secondItem="fea-gr-rzf" secondAttribute="bottom" constant="6" id="hH2-5I-dAs"/>
                     <constraint firstItem="fea-gr-rzf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="hQe-Va-Brq"/>
-                    <constraint firstItem="fea-gr-rzf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="x9k-wa-pjN"/>
+                    <constraint firstItem="fea-gr-rzf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="x9k-wa-pjN"/>
                     <constraint firstItem="wGj-CK-zn6" firstAttribute="top" secondItem="pNJ-nc-p3v" secondAttribute="bottom" constant="3" id="xPq-fj-51g"/>
                 </constraints>
             </tableViewCellContentView>

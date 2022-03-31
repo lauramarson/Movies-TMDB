@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MovieTableViewCell: UITableViewCell {
     @IBOutlet var posterImage: UIImageView!
@@ -16,11 +17,16 @@ class MovieTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+//    override func prepareForReuse() {
+//        posterImage.image = UIImage(named: "imagePlaceholder")
+//    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func fetchImage(posterPath: String) {
+        let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")
+        let placeholderImage = UIImage(named: "imagePlaceholder")
+        
+        posterImage.sd_setImage(with: imageURL, placeholderImage: placeholderImage)
     }
     
 }

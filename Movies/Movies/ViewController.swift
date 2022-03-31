@@ -50,7 +50,10 @@ class ViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Movie", for: indexPath) as? MovieTableViewCell else {
             return UITableViewCell()
         }
+        
         let movie = movies[indexPath.row]
+        
+        cell.fetchImage(posterPath: movie.poster_path)
         
         cell.movieTitle.text = movie.title
         
@@ -99,7 +102,6 @@ extension ViewController: UISearchBarDelegate {
 
         if searchBar.text == "" {
             movies.removeAll(keepingCapacity: true)
-//            tableView.reloadData()
         }
         tableView.reloadData()
     }
@@ -135,6 +137,21 @@ extension ViewController {
                 self?.tableView.reloadData()
             }
     }
+    
+//    func fetchImage() {
+//        for (index, movie) in movies.enumerated() {
+//            AF.request("https://image.tmdb.org/t/p/w500\(movie.poster_path)",method: .get).response { [weak self] response in
+//                guard let self = self else { return }
+//                switch response.result {
+//                    case .success(let responseData):
+//                        self.movies[index].image_data = responseData ?? Data()
+//
+//                    case .failure(let error):
+//                        print("ERROR:",error)
+//                }
+//            }
+//        }
+//    }
     
     func fetchGenres() {
         AF.request("https://api.themoviedb.org/3/genre/movie/list?api_key=\(PrivateKey.key)&language=en-US")

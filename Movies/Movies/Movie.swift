@@ -16,4 +16,5 @@ struct Movie: Codable { //TODO codingkey
     var overview: String
     var poster_path: String
     var genre_names: String?
+    var image_data: Data?
 }

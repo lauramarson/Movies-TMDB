@@ -245,6 +245,11 @@
             <point key="canvasLocation" x="1826.0869565217392" y="77.008928571428569"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="0Xr-L9-JBh">
+            <size key="intrinsicContentSize" width="176" height="25"/>
+        </designable>
+    </designables>
     <resources>
         <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
