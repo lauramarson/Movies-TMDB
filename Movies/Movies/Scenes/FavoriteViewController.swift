@@ -19,8 +19,6 @@ class FavoriteViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-//        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +56,6 @@ extension FavoriteViewController: UICollectionViewDataSource {
         if let posterData = movie.value(forKeyPath: "poster_image") as? Data {
             let posterImage = UIImage(data: posterData)
             cell.imageView.image = posterImage
-//            cell.imageView.layer.cornerRadius = 20
         }
         
         cell.layer.cornerRadius = 5

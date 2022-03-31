@@ -23,7 +23,6 @@ class FavoriteButton: UIButton {
             } else {
                 self.setTitle(" Add to Favorites ", for: .normal)
             }
-//            self.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         }
     }
     
@@ -34,5 +33,10 @@ class FavoriteButton: UIButton {
     
     @objc func buttonAction() {
         delegate?.buttonTapped()
+        
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
+            self.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            self.transform = .identity
+        })
     }
 }

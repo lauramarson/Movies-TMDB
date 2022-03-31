@@ -18,9 +18,9 @@ class MovieTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-//    override func prepareForReuse() {
-//        posterImage.image = UIImage(named: "imagePlaceholder")
-//    }
+    override func prepareForReuse() {
+        posterImage.image = UIImage(named: "imagePlaceholder")
+    }
 
     func fetchImage(posterPath: String) {
         let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")

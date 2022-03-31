@@ -45,11 +45,19 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let movie = movie else { return }
-        
         favButton.delegate = self
         
+        setComponents()
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(saveChanges), name: UIApplication.willResignActiveNotification, object: nil)
+    }
+    
+    func setComponents() {
+        guard let movie = movie else { return }
+        
         movieTitle.text = movie.title
+        
         overview.text = movie.overview
         overview.flashScrollIndicators()
         
@@ -63,15 +71,6 @@ class DetailViewController: UIViewController {
         if !fromFavoriteVC {
             genreNames()
         }
-
-        setLabels()
-        
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(saveChanges), name: UIApplication.willResignActiveNotification, object: nil)
-    }
-    
-    func setLabels() {
-        guard let movie = movie else { return }
         
         genresLabel.text = """
         Genres
@@ -79,8 +78,7 @@ class DetailViewController: UIViewController {
         """
         
         voteAverageLabel.text = "\(String(movie.vote_average))/10"
-        
-        
+    
         let yearString = String(movie.release_date.prefix(4))
         releaseYear.text = yearString  
     }
@@ -148,23 +146,17 @@ extension DetailViewController: ActionDelegateProtocol {
         movieData.setValue(movie.vote_average, forKeyPath: "vote_average")
         movieData.setValue(movie.genre_names, forKeyPath: "genres")
         movieData.setValue(imageData, forKeyPath: "poster_image")
-//        do {
-//            try managedContext.save()
-//          } catch let error as NSError {
-//            print("Could not save. \(error), \(error.userInfo)")
-//          }
     }
     
     func removeFavorite() {
         guard let movie = movie, let managedContext = managedContext else { return }
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
-//        fetchRequest.fetchLimit =  1
+        fetchRequest.fetchLimit =  1
         fetchRequest.predicate = NSPredicate(format: "id == %d", movie.id)
         
         do { //******
             let object = try managedContext.fetch(fetchRequest)
-            print(object)
             managedContext.delete(object[0])
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")

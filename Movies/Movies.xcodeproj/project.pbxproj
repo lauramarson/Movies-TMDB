@@ -76,6 +76,81 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A4655C8C27F64E9900203FEA /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				A4ACF5C027E627C400E8F890 /* FavoriteViewController.swift */,
+				A4ACF5BE27E527EE00E8F890 /* DetailViewController.swift */,
+				A4ACF5A127E25B0400E8F890 /* ViewController.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		A4655C9027F64F8900203FEA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A4655C9527F650A400203FEA /* PrivateKey */,
+				A4655C9227F64FC500203FEA /* Genres */,
+				A4655C9127F64FAA00203FEA /* Movies */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A4655C9127F64FAA00203FEA /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				A4ACF5BA27E3D62400E8F890 /* Movies.swift */,
+				A4ACF5B827E3BAF500E8F890 /* Movie.swift */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		A4655C9227F64FC500203FEA /* Genres */ = {
+			isa = PBXGroup;
+			children = (
+				A4655C8027EDEDA600203FEA /* Genres.swift */,
+				A4ACF5BC27E5143700E8F890 /* Genre.swift */,
+			);
+			path = Genres;
+			sourceTree = "<group>";
+		};
+		A4655C9327F64FEA00203FEA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A4655C7E27EB7BAF00203FEA /* FavoriteButton.swift */,
+				A4655C8927F4ECA100203FEA /* MovieTableViewCell.xib */,
+				A4655C8827F4ECA100203FEA /* MovieTableViewCell.swift */,
+				A4ACF5C227E62FA000E8F890 /* FavoriteCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A4655C9527F650A400203FEA /* PrivateKey */ = {
+			isa = PBXGroup;
+			children = (
+				A4ACF5B427E2661400E8F890 /* PrivateKey.swift */,
+			);
+			path = PrivateKey;
+			sourceTree = "<group>";
+		};
+		A4655C9627F66A6500203FEA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A4655C8427F4DFC400203FEA /* storyboardSettings.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A4655C9727F66AC800203FEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A4ACF5A927E25B0600E8F890 /* Assets.xcassets */,
+				A4ACF5AB27E25B0600E8F890 /* LaunchScreen.storyboard */,
+				A4ACF5AE27E25B0600E8F890 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		A4ACF59127E25B0400E8F890 = {
 			isa = PBXGroup;
 			children = (
@@ -97,26 +172,15 @@
 		A4ACF59C27E25B0400E8F890 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				A4655C9727F66AC800203FEA /* Resources */,
+				A4655C9627F66A6500203FEA /* Extensions */,
+				A4655C9327F64FEA00203FEA /* Components */,
+				A4655C9027F64F8900203FEA /* Models */,
+				A4655C8C27F64E9900203FEA /* Scenes */,
 				A4ACF59D27E25B0400E8F890 /* AppDelegate.swift */,
 				A4ACF59F27E25B0400E8F890 /* SceneDelegate.swift */,
-				A4ACF5A127E25B0400E8F890 /* ViewController.swift */,
-				A4ACF5BE27E527EE00E8F890 /* DetailViewController.swift */,
-				A4ACF5C027E627C400E8F890 /* FavoriteViewController.swift */,
 				A4ACF5A327E25B0400E8F890 /* Main.storyboard */,
-				A4ACF5A927E25B0600E8F890 /* Assets.xcassets */,
-				A4ACF5AB27E25B0600E8F890 /* LaunchScreen.storyboard */,
-				A4ACF5AE27E25B0600E8F890 /* Info.plist */,
 				A4ACF5A627E25B0400E8F890 /* Movies.xcdatamodeld */,
-				A4ACF5B427E2661400E8F890 /* PrivateKey.swift */,
-				A4ACF5B827E3BAF500E8F890 /* Movie.swift */,
-				A4ACF5BA27E3D62400E8F890 /* Movies.swift */,
-				A4ACF5BC27E5143700E8F890 /* Genre.swift */,
-				A4655C8027EDEDA600203FEA /* Genres.swift */,
-				A4655C8427F4DFC400203FEA /* storyboardSettings.swift */,
-				A4655C7E27EB7BAF00203FEA /* FavoriteButton.swift */,
-				A4ACF5C227E62FA000E8F890 /* FavoriteCell.swift */,
-				A4655C8827F4ECA100203FEA /* MovieTableViewCell.swift */,
-				A4655C8927F4ECA100203FEA /* MovieTableViewCell.xib */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -409,7 +473,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 499LUVNFHJ;
-				INFOPLIST_FILE = Movies/Info.plist;
+				INFOPLIST_FILE = Movies/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -429,7 +493,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 499LUVNFHJ;
-				INFOPLIST_FILE = Movies/Info.plist;
+				INFOPLIST_FILE = Movies/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
