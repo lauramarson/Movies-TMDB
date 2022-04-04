@@ -76,14 +76,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A4655C8C27F64E9900203FEA /* Scenes */ = {
+		A4655C8C27F64E9900203FEA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				A4ACF5C027E627C400E8F890 /* FavoriteViewController.swift */,
 				A4ACF5BE27E527EE00E8F890 /* DetailViewController.swift */,
 				A4ACF5A127E25B0400E8F890 /* ViewController.swift */,
 			);
-			path = Scenes;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A4655C9027F64F8900203FEA /* Models */ = {
@@ -176,7 +176,7 @@
 				A4655C9627F66A6500203FEA /* Extensions */,
 				A4655C9327F64FEA00203FEA /* Components */,
 				A4655C9027F64F8900203FEA /* Models */,
-				A4655C8C27F64E9900203FEA /* Scenes */,
+				A4655C8C27F64E9900203FEA /* Views */,
 				A4ACF59D27E25B0400E8F890 /* AppDelegate.swift */,
 				A4ACF59F27E25B0400E8F890 /* SceneDelegate.swift */,
 				A4ACF5A327E25B0400E8F890 /* Main.storyboard */,

@@ -114,98 +114,6 @@
             endingLineNumber = "29"
             landmarkName = "DetailViewController"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - e93d58b8de93b547"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Movies.DetailViewController.movie.getter : Swift.Optional&lt;Movies.Movie&gt;"
-                  moduleName = "Movies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "332">
-               </Location>
-               <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 5210f03ab1744373"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Movies.DetailViewController.movie.setter : Swift.Optional&lt;Movies.Movie&gt;"
-                  moduleName = "Movies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "352">
-               </Location>
-               <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - cad74372e95d5401"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Movies.DetailViewController.movie.modify : Swift.Optional&lt;Movies.Movie&gt;"
-                  moduleName = "Movies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 82b0feb26c6e02c1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Movies.DetailViewController.movie.modify : Swift.Optional&lt;Movies.Movie&gt; with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "Movies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 154d62d04de3962c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Movies.DetailViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Movies.DetailViewController"
-                  moduleName = "Movies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "536">
-               </Location>
-               <Location
-                  uuid = "84D04034-5376-4466-97CD-152BAEC88925 - 9eba937ffdd25926"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Movies.DetailViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Movies.DetailViewController&gt;"
-                  moduleName = "Movies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "512">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -270,38 +178,6 @@
             endingLineNumber = "149"
             landmarkName = "ViewController"
             landmarkType = "21">
-            <Locations>
-               <Location
-                  uuid = "5C6E5883-818A-4833-90CE-AE32F281CB95 - 669a2c3f3f6b5690"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Movies.ViewController.fetchImage() -&gt; ()"
-                  moduleName = "Movies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "149"
-                  endingLineNumber = "149"
-                  offsetFromSymbolStart = "724">
-               </Location>
-               <Location
-                  uuid = "5C6E5883-818A-4833-90CE-AE32F281CB95 - dad8cbd0f95fbc53"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in Movies.ViewController.fetchImage() -&gt; ()"
-                  moduleName = "Movies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lauramarson/Documents/GitHub-Laura/Movies-TMDB/Movies/Movies/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "149"
-                  endingLineNumber = "149"
-                  offsetFromSymbolStart = "188">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -318,6 +194,22 @@
             endingLineNumber = "57"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "73640BC1-CD96-4734-8858-7C23DD456B01"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movies/Views/DetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "DetailViewController"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -47,6 +47,10 @@ class DetailViewController: UIViewController {
         
         favButton.delegate = self
         
+        if fromFavoriteVC == false {
+            genreNames()
+        }
+        
         setComponents()
         
         let notificationCenter = NotificationCenter.default
@@ -67,10 +71,6 @@ class DetailViewController: UIViewController {
         moviePoster.image = UIImage(data: imageData, scale:1)
         
         setFavorite(id: movie.id)
-        
-        if !fromFavoriteVC {
-            genreNames()
-        }
         
         genresLabel.text = """
         Genres
@@ -162,22 +162,6 @@ extension DetailViewController: ActionDelegateProtocol {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
-    
-    func genreNames() {
-        guard let movie = movie, let managedContext = managedContext else { return }
-        
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieGenres")
-        
-        let genreNames: [String] = movie.genre_ids.compactMap { genreID in
-            fetchRequest.predicate = NSPredicate(format: "id == %d", genreID)
-            return try?
-                managedContext.fetch(fetchRequest)
-                .first?
-                .value(forKey: "name") as? String
-        }
-
-        self.movie?.genre_names = genreNames.joined(separator: ", ")
-    }
 }
 
 extension DetailViewController {
@@ -194,6 +178,22 @@ extension DetailViewController {
                     print("ERROR:",error)
             }
         }
+    }
+    
+    func genreNames() {
+        guard let movie = movie, let managedContext = managedContext else { return }
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieGenres")
+        
+        let genreNames: [String] = movie.genre_ids.compactMap { genreID in
+            fetchRequest.predicate = NSPredicate(format: "id == %d", genreID)
+            return try?
+                managedContext.fetch(fetchRequest)
+                .first?
+                .value(forKey: "name") as? String
+        }
+
+        self.movie?.genre_names = genreNames.joined(separator: ", ")
     }
 }
 

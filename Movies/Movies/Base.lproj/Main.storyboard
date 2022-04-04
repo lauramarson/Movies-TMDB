@@ -113,7 +113,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ljt-c8-dv0">
-                                <rect key="frame" x="153" y="128.66666666666666" width="56" height="183.99999999999997"/>
+                                <rect key="frame" x="153" y="128.66666666666666" width="255" height="183.99999999999997"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnH-OW-Cxa">
                                         <rect key="frame" x="0.0" y="0.0" width="56" height="83.333333333333329"/>
@@ -184,6 +184,7 @@
                             <constraint firstItem="ljt-c8-dv0" firstAttribute="leading" secondItem="NhJ-Rf-t70" secondAttribute="trailing" constant="15" id="SXA-5E-Oy2"/>
                             <constraint firstItem="0Xr-L9-JBh" firstAttribute="centerX" secondItem="XDb-Wy-eKa" secondAttribute="centerX" id="Sxb-U7-Pgb"/>
                             <constraint firstItem="0B5-Vz-ltM" firstAttribute="centerX" secondItem="NDb-AA-TLr" secondAttribute="centerX" id="X0C-DZ-65m"/>
+                            <constraint firstItem="NDb-AA-TLr" firstAttribute="trailing" secondItem="ljt-c8-dv0" secondAttribute="trailing" constant="20" id="ZOl-gy-XD8"/>
                             <constraint firstItem="NDb-AA-TLr" firstAttribute="trailing" secondItem="XDb-Wy-eKa" secondAttribute="trailing" constant="20" id="ZpB-bT-uPY"/>
                             <constraint firstItem="NhJ-Rf-t70" firstAttribute="bottom" secondItem="ljt-c8-dv0" secondAttribute="bottom" id="fFd-J3-hNw"/>
                             <constraint firstItem="NDb-AA-TLr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0B5-Vz-ltM" secondAttribute="trailing" constant="10" id="q80-vm-lx1"/>
