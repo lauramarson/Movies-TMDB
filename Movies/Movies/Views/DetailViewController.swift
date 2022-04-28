@@ -107,13 +107,16 @@ class DetailViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        saveChanges()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
         if fromFavoriteVC { //TODO
             fromFavoriteVC = false
-            guard let favorite = favorite, let indexPath = indexPath else { return }
+            guard let favorite = favorite, let indexPath = indexPath, !favorite else { return }
+            saveChanges()
             self.delegate?.update(favorite: favorite, indexPath: indexPath)
+        } else {
+            saveChanges()
         }
     }
     
