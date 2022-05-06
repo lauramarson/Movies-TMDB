@@ -13,19 +13,28 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet var movieTitle: UILabel!
     @IBOutlet var releaseYear: UILabel!
     
+    var movieVM: MovieViewModel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    override func prepareForReuse() {
-        posterImage.image = UIImage(named: "imagePlaceholder")
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        posterImage.image = UIImage(named: "imagePlaceholder")
+//    }
 
-    func fetchImage(posterPath: String) {
-        let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")
-        let placeholderImage = UIImage(named: "imagePlaceholder")
+    func configure() {
+        guard let movieVM = movieVM else { return }
         
+        self.movieTitle.text = movieVM.title
+        
+        self.releaseYear.text = movieVM.releaseYear
+        
+        let imageURL = movieVM.imageURL
+        let placeholderImage = UIImage(named: "imagePlaceholder")
+
         posterImage.sd_setImage(with: imageURL, placeholderImage: placeholderImage)
     }
     

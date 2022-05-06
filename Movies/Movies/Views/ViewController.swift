@@ -11,7 +11,8 @@ import UIKit
 
 class ViewController: UITableViewController {
     lazy var searchBar: UISearchBar = UISearchBar()
-    var movies = [Movie]()
+    var searchMoviesVM = SearchMoviesViewModel()
+    
     var genres = [Genre]() {
         didSet {
             saveGenres()
@@ -36,14 +37,14 @@ class ViewController: UITableViewController {
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         
-        guard isFirstLaunch else { return }
-        fetchGenres()
-        
-        print(genres)
+//        guard isFirstLaunch else { return }
+//        fetchGenres()
+//
+//        print(genres)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return searchMoviesVM.numberOfRows(section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,14 +52,10 @@ class ViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        let movie = movies[indexPath.row]
+        let movieModel = searchMoviesVM.modelAt(indexPath.row)
+        cell.movieVM = MovieViewModel(movieModel)
         
-        cell.fetchImage(posterPath: movie.poster_path)
-        
-        cell.movieTitle.text = movie.title
-        
-        let yearString = String(movie.release_date.prefix(4))
-        cell.releaseYear.text = yearString
+        cell.configure()
         
         return cell
     }
@@ -66,8 +63,9 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let dvc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController else { return }
 
-        dvc.movie = movies[indexPath.row]
-        
+        let movieModel = searchMoviesVM.modelAt(indexPath.row)
+        dvc.movieVM = MovieViewModel(movieModel)
+
         navigationController?.pushViewController(dvc, animated: true)
     }
     
@@ -98,12 +96,16 @@ extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = searchText
         
-        fetchMovies()
+        searchMoviesVM.searchForMovies(searchText: searchText) { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
 
         if searchBar.text == "" {
-            movies.removeAll(keepingCapacity: true)
+            searchMoviesVM.eraseMovies()
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -117,7 +119,7 @@ extension ViewController: UISearchBarDelegate {
     func resetSearchbar(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.text = ""
-        movies.removeAll(keepingCapacity: true)
+        searchMoviesVM.eraseMovies()
         tableView.reloadData()
         searchBar.resignFirstResponder()
     }
@@ -125,33 +127,19 @@ extension ViewController: UISearchBarDelegate {
 }
 
 extension ViewController {
-    func fetchMovies() {
-        searchText.removeAll(where: {$0.isSymbol || $0.isPunctuation})
-        let words = searchText.replacingOccurrences(of: " ", with: "+")
-    
-        AF.request("https://api.themoviedb.org/3/search/movie?api_key=\(PrivateKey.key)&query=\(words)")
-            .validate()
-            .responseDecodable(of: Movies.self) { [weak self] (response) in
-                guard let films = response.value else { return }
-                self?.movies = films.results
-                self?.tableView.reloadData()
-            }
-    }
-    
-//    func fetchImage() {
-//        for (index, movie) in movies.enumerated() {
-//            AF.request("https://image.tmdb.org/t/p/w500\(movie.poster_path)",method: .get).response { [weak self] response in
-//                guard let self = self else { return }
-//                switch response.result {
-//                    case .success(let responseData):
-//                        self.movies[index].image_data = responseData ?? Data()
+//    func fetchMovies() {
+//        searchText.removeAll(where: {$0.isSymbol || $0.isPunctuation})
+//        let words = searchText.replacingOccurrences(of: " ", with: "+")
 //
-//                    case .failure(let error):
-//                        print("ERROR:",error)
-//                }
+//        AF.request("https://api.themoviedb.org/3/search/movie?api_key=\(PrivateKey.key)&query=\(words)")
+//            .validate()
+//            .responseDecodable(of: Movies.self) { [weak self] (response) in
+//                guard let films = response.value else { return }
+//                self?.movies = films.results
+//                self?.tableView.reloadData()
 //            }
-//        }
 //    }
+
     
     func fetchGenres() {
         AF.request("https://api.themoviedb.org/3/genre/movie/list?api_key=\(PrivateKey.key)&language=en-US")
@@ -164,16 +152,6 @@ extension ViewController {
     }
 }
 
-//extension UIApplication {
-//    class func isFirstLaunch() -> Bool {
-//        if !UserDefaults.standard.bool(forKey: "hasBeenLaunchedBeforeFlag") {
-//            UserDefaults.standard.set(true, forKey: "hasBeenLaunchedBeforeFlag")
-//            UserDefaults.standard.synchronize()
-//            return true
-//        }
-//        return false
-//    }
-//}
 
 extension ViewController {
     var isFirstLaunch: Bool {
