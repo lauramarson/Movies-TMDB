@@ -63,18 +63,20 @@ class DetailViewController: UIViewController {
         overview.text = movieVM.overview
         overview.flashScrollIndicators()
         
-        if movieVM.posterPath != "" {
+        if let imageData = movieVM.imageData {
+            moviePoster.image = UIImage(data: imageData, scale:1)
+            
+        } else {
             movieVM.getPoster(posterPath: movieVM.posterPath) { [weak self] (data) in
-//                self?.imageData = data
                 self?.moviePoster.image = UIImage(data: data, scale:1)
             }
+            
         }
-//        moviePoster.image = UIImage(data: imageData, scale:1)
         
         favorite = detailVM?.setFavorite(id: movieVM.id)
         
         if fromFavoriteVC == false {
-            self.movieVM?.genres = detailVM?.genreNames(ids: movieVM.genreIDs)
+            detailVM?.genreNames(movie: movieVM)
         }
         
         genresLabel.text = """

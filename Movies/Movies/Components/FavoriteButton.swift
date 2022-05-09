@@ -14,7 +14,6 @@ protocol ActionDelegateProtocol: AnyObject {
 class FavoriteButton: UIButton {
     weak var delegate: ActionDelegateProtocol?
     
-    
     var favorite: Bool? {
         didSet {
             guard let favorite = favorite else { return }

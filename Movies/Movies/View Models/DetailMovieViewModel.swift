@@ -38,12 +38,8 @@ class DetailMovieViewModel {
         coreData?.saveChanges()
     }
     
-    func genreNames(ids: [Int]) -> String {
-        if let genreNames = coreData?.getGenreNames(ids: ids) {
-            return genreNames
-        } else {
-            fatalError("Error getting genre names")
-        }
+    func genreNames(movie: MovieViewModel) {
+        movie.movie.genre_names = coreData?.getGenreNames(ids: movie.genreIDs)
     }
     
 }

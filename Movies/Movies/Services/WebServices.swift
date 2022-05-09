@@ -64,3 +64,16 @@ extension WebServices {
         
 //    }
 }
+
+extension WebServices {
+    func fetchGenres(completion: @escaping ([Genre]) -> ()) {
+        AF.request("https://api.themoviedb.org/3/genre/movie/list?api_key=\(PrivateKey.key)&language=en-US")
+            .validate()
+            .responseDecodable(of: Genres.self) { (response) in
+                guard let genres = response.value else { return }
+                completion(genres.genres)
+//                self?.genres = genres.genres
+//                self?.saveGenres()
+            }
+    }
+}

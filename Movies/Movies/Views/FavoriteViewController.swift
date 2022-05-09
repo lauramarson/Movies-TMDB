@@ -23,7 +23,8 @@ class FavoriteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        favoritesVM.getFavoriteMovies()
         collectionView.reloadData()
     }
     
@@ -99,6 +100,7 @@ extension FavoriteViewController: ReloadDataProtocol {
 //        guard favorite == false else { return }
 //
 //        favorites.remove(at: indexPath)
+        favoritesVM.getFavoriteMovies()
         collectionView.reloadData()
     }
 }

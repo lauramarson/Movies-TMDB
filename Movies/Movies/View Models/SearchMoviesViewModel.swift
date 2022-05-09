@@ -44,7 +44,7 @@ extension SearchMoviesViewModel {
 }
 
 class MovieViewModel {
-    let movie: Movie
+    var movie: Movie
     
     init(_ movie: Movie) {
         self.movie = movie
@@ -78,20 +78,24 @@ class MovieViewModel {
         return movie.imageURL
     }
     
-    var imageData: Data?
+    var imageData: Data? {
+        return movie.image_data
+    }
     
     var genreIDs: [Int] {
         return movie.genre_ids
     }
     
-    var genres: String?
+    var genres: String? {
+        return movie.genre_names
+    }
 }
 
 extension MovieViewModel {
     
     func getPoster(posterPath: String, completion: @escaping (Data) -> ()) {
         WebServices().fetchImage(posterPath: posterPath) { [weak self] (data) in
-            self?.imageData = data
+            self?.movie.image_data = data
             completion(data)
         }
     }

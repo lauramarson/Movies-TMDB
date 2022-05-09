@@ -111,10 +111,8 @@ extension CoreData {
 extension CoreData {
     
     func saveChanges() {
-        guard let managedContext = managedContext else { return }
-        
         do {
-            try managedContext.save()
+            try self.managedContext?.save()
           } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
           }
@@ -123,6 +121,25 @@ extension CoreData {
 }
 
 extension CoreData {
+    
+    func saveGenres(_ genres: [Genre]) {
+        guard let managedContext = managedContext else { return }
+
+        let entity = NSEntityDescription.entity(forEntityName: "MovieGenres", in: managedContext)!
+
+        for genre in genres { //TODO: for each
+            let genreData = NSManagedObject(entity: entity, insertInto: managedContext)
+
+            genreData.setValue(genre.id, forKeyPath: "id")
+            genreData.setValue(genre.name, forKeyPath: "name")
+        }
+
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
     
     func getGenreNames(ids: [Int]) -> String {
         guard let managedContext = managedContext else {
