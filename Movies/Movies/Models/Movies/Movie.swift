@@ -18,3 +18,15 @@ struct Movie: Codable { //TODO codingkey
     var genre_names: String?
     var image_data: Data?
 }
+
+extension Movie {
+    
+    var releaseYear: String { String(self.release_date.prefix(4)) }
+    
+    var imageURL: URL {
+        guard let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(poster_path)") else {
+            fatalError("URL error")
+        }
+        return imageURL
+    }
+}

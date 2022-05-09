@@ -59,7 +59,7 @@ class MovieViewModel {
     }
     
     var releaseYear: String {
-        return String(movie.release_date.prefix(4))
+        return movie.releaseYear
     }
     
     var overview: String {
@@ -75,14 +75,16 @@ class MovieViewModel {
     }
     
     var imageURL: URL {
-        let posterPath = movie.poster_path
-        guard let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)") else {
-            fatalError("URL error")
-        }
-        return imageURL
+        return movie.imageURL
     }
     
     var imageData: Data?
+    
+    var genreIDs: [Int] {
+        return movie.genre_ids
+    }
+    
+    var genres: String?
 }
 
 extension MovieViewModel {

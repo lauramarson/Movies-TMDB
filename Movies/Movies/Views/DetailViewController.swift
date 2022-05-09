@@ -5,8 +5,6 @@
 //  Created by Laura Pinheiro Marson on 18/03/22.
 //
 
-import Alamofire
-import CoreData
 import UIKit
 
 protocol ReloadDataProtocol: AnyObject {
@@ -25,9 +23,10 @@ class DetailViewController: UIViewController {
     weak var delegate: ReloadDataProtocol?
     
     var movieVM: MovieViewModel?
+    var detailVM: DetailMovieViewModel?
     
     var fromFavoriteVC = false
-    var indexPath: Int?
+//    var indexPath: Int?
 //    var imageData = Data()
     
     var favorite: Bool? {
@@ -46,11 +45,9 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        detailVM = DetailMovieViewModel()
+        
         favButton.delegate = self
-//
-//        if fromFavoriteVC == false {
-//            genreNames()
-//        }
         
         setComponents()
         
@@ -74,11 +71,15 @@ class DetailViewController: UIViewController {
         }
 //        moviePoster.image = UIImage(data: imageData, scale:1)
         
-        setFavorite(id: movieVM.id)
+        favorite = detailVM?.setFavorite(id: movieVM.id)
+        
+        if fromFavoriteVC == false {
+            self.movieVM?.genres = detailVM?.genreNames(ids: movieVM.genreIDs)
+        }
         
         genresLabel.text = """
         Genres
-        \(movie.genre_names ?? "")
+        \(movieVM.genres ?? "")
         """
         
         voteAverageLabel.text = "\(String(movieVM.voteAverage))/10"
@@ -86,28 +87,16 @@ class DetailViewController: UIViewController {
         releaseYear.text = movieVM.releaseYear
     }
     
-//    @objc func saveChanges() {
-//        guard let managedContext = managedContext else { return }
-//        
-//        do {
-//            try managedContext.save()
-//          } catch let error as NSError {
-//            print("Could not save. \(error), \(error.userInfo)")
-//          }
-//    }
-    
+    @objc func saveChanges() {
+        detailVM?.saveChanges()
+    }
+//
 //    func setFavorite(id: Int) {
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
-//        fetchRequest.fetchLimit =  1
-//        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
 //
-//        do {
-//            let count = try managedContext?.count(for: fetchRequest)
-//            self.favorite = (count == 1)
-//
-//        } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
+//        coreData?.setFavorite(id: id) { [weak self] (isFavorite) in
+//            self?.favorite = isFavorite
 //        }
+//
 //    }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -115,79 +104,53 @@ class DetailViewController: UIViewController {
 
         if fromFavoriteVC { //TODO
             fromFavoriteVC = false
-            guard let favorite = favorite, let indexPath = indexPath, !favorite else { return }
-            saveChanges()
-            self.delegate?.update(favorite: favorite, indexPath: indexPath)
+            guard let favorite = favorite, !favorite else { return }
+            detailVM?.saveChanges()
+            self.delegate?.update(favorite: favorite, indexPath: 1)
         } else {
-            saveChanges()
+            detailVM?.saveChanges()
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let movie = movie else { return }
-        setFavorite(id: movie.id)
+        guard let movieVM = movieVM else { return }
+        favorite = detailVM?.setFavorite(id: movieVM.id)
     }
 }
 
 extension DetailViewController: ActionDelegateProtocol {
     func buttonTapped() {
-        guard let favorite = favorite else { return }
-        favorite ? removeFavorite() : addFavorite()
+        guard let favorite = favorite, let movieVM = movieVM else { return }
+        favorite ? detailVM?.removeFavorite(id: movieVM.id) : detailVM?.addFavorite(movieVM)
 
         self.favorite = !favorite
     }
 
 //    func addFavorite() {
-//        guard let movieVM = movieVM, let managedContext = managedContext else { return }
+//        guard let movieVM = movieVM else { return }
 //
-//        let entity = NSEntityDescription.entity(forEntityName: "FavoriteMovies", in: managedContext)!
-//
-//        let movieData = NSManagedObject(entity: entity, insertInto: managedContext)
-//
-//        movieData.setValue(movieVM.id, forKeyPath: "id")
-//        movieData.setValue(movieVM.title, forKeyPath: "title")
-//        movieData.setValue(movieVM.overview, forKeyPath: "overview")
-//        movieData.setValue(movieVM.releaseYear, forKeyPath: "release_date")
-//        movieData.setValue(movieVM.voteAverage, forKeyPath: "vote_average")
-//        movieData.setValue(movieVM.genres, forKeyPath: "genres")
-//        movieData.setValue(movieVM.imageData, forKeyPath: "poster_image")
+//        coreData?.addFavorite(movieVM)
 //    }
-
+//
 //    func removeFavorite() {
-//        guard let movieVM = movieVM, let managedContext = managedContext else { return }
+//        guard let movieVM = movieVM else { return }
 //
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
-//        fetchRequest.fetchLimit =  1
-//        fetchRequest.predicate = NSPredicate(format: "id == %d", movieVM.id)
-//
-//        do { //******
-//            let object = try managedContext.fetch(fetchRequest)
-//            managedContext.delete(object[0])
-//        } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//        }
+//        coreData?.removeFavorite(id: movieVM.id)
 //    }
 }
 
-extension DetailViewController {
-
+//extension DetailViewController {
+//
 //    func genreNames() {
-//        guard let movie = movie, let managedContext = managedContext else { return }
-//
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieGenres")
-//
-//        let genreNames: [String] = movie.genre_ids.compactMap { genreID in
-//            fetchRequest.predicate = NSPredicate(format: "id == %d", genreID)
-//            return try?
-//                managedContext.fetch(fetchRequest)
-//                .first?
-//                .value(forKey: "name") as? String
+//        guard let movieVM = movieVM else { return }
+//        
+//        coreData?.getGenreNames(ids: movieVM.genreIDs) { [weak self] (genreNames) in
+//            self?.movieVM?.genres = genreNames
 //        }
 //
-//        self.movie?.genre_names = genreNames.joined(separator: ", ")
 //    }
-}
+//}
 
 
 

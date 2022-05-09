@@ -11,31 +11,70 @@ import UIKit
 
 class CoreData {
     
-    var managedContext: NSManagedObjectContext? {
-        (UIApplication.shared.delegate as? AppDelegate)?
+    var managedContext: NSManagedObjectContext?
+    
+    init() {
+        managedContext = (UIApplication.shared.delegate as? AppDelegate)?
             .persistentContainer
             .viewContext
+    }
+    
+}
+
+extension CoreData {
+    
+    func getFavoriteMovies(completion: @escaping ([Movie]) -> ()) {
+        
+        guard let managedContext = managedContext else { return }
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
+          
+        do {
+            let favorites = try managedContext.fetch(fetchRequest)
+            let convertedMovies = favorites.map() { movie in
+                convertMovie(movie: movie)
+            }
+            completion(convertedMovies)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func convertMovie(movie: NSManagedObject) -> Movie { //TODO
+        let id = movie.value(forKey: "id") as! Int
+        let title = movie.value(forKey: "title") as! String
+        let overview = movie.value(forKey: "overview") as! String
+        let release_date = movie.value(forKey: "release_date") as! String
+        let vote_average = movie.value(forKey: "vote_average") as! Float
+        let genre_names = movie.value(forKey: "genres") as! String
+        let image_data = movie.value(forKey: "poster_image") as! Data
+        
+        let convertedMovie = Movie(id: id, title: title, release_date: release_date, genre_ids: [], vote_average: vote_average, overview: overview, poster_path: "", genre_names: genre_names, image_data: image_data)
+        return convertedMovie
     }
     
 }
     
 extension CoreData {
     
-    func setFavorite(id: Int) {
+    func setFavorite(id: Int) -> Bool {
+        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
         fetchRequest.fetchLimit =  1
         fetchRequest.predicate = NSPredicate(format: "id == %d", id)
         
         do {
             let count = try managedContext?.count(for: fetchRequest)
-            self.favorite = (count == 1)
+            return (count == 1)
             
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
+            return false
         }
     }
     
-    func addFavorite(_ movie: MovieViewModel) {
+    func addFavorite(_ movie: Movie) {
+        
         guard let managedContext = managedContext else { return }
 
         let entity = NSEntityDescription.entity(forEntityName: "FavoriteMovies", in: managedContext)!
@@ -46,12 +85,13 @@ extension CoreData {
         movieData.setValue(movie.title, forKeyPath: "title")
         movieData.setValue(movie.overview, forKeyPath: "overview")
         movieData.setValue(movie.releaseYear, forKeyPath: "release_date")
-        movieData.setValue(movie.voteAverage, forKeyPath: "vote_average")
-        movieData.setValue(movie.genres, forKeyPath: "genres")
-        movieData.setValue(movie.imageData, forKeyPath: "poster_image")
+        movieData.setValue(movie.vote_average, forKeyPath: "vote_average")
+        movieData.setValue(movie.genre_names, forKeyPath: "genres")
+        movieData.setValue(movie.image_data, forKeyPath: "poster_image")
     }
     
     func removeFavorite(id: Int) {
+        
         guard let managedContext = managedContext else { return }
 
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
@@ -70,7 +110,7 @@ extension CoreData {
     
 extension CoreData {
     
-    @objc func saveChanges() {
+    func saveChanges() {
         guard let managedContext = managedContext else { return }
         
         do {
@@ -84,12 +124,14 @@ extension CoreData {
 
 extension CoreData {
     
-    func getGenreNames() {
-        guard let movie = movie, let managedContext = managedContext else { return }
+    func getGenreNames(ids: [Int]) -> String {
+        guard let managedContext = managedContext else {
+            fatalError("Couldn't get managed context")
+        }
 
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieGenres")
 
-        let genreNames: [String] = movie.genre_ids.compactMap { genreID in
+        let genreNames: [String] = ids.compactMap { genreID in
             fetchRequest.predicate = NSPredicate(format: "id == %d", genreID)
             return try?
                 managedContext.fetch(fetchRequest)
@@ -97,7 +139,7 @@ extension CoreData {
                 .value(forKey: "name") as? String
         }
 
-        self.movie?.genre_names = genreNames.joined(separator: ", ")
+        return genreNames.joined(separator: ", ")
     }
     
 }
