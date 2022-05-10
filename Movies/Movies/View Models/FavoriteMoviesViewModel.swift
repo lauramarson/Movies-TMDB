@@ -20,8 +20,12 @@ class FavoriteMoviesViewModel {
         return favorites.count
     }
     
-    func modelAt(_ index: Int) -> MovieViewModel {
-        return MovieViewModel(favorites[index])
+    func modelAt(_ index: Int) -> Movie {
+        return favorites[index]
+    }
+    
+    func posterAt(_ index: Int) -> Data {
+        return favorites[index].image_data ?? Data()
     }
     
     func getFavoriteMovies() {

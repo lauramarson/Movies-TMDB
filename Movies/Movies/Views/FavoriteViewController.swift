@@ -40,11 +40,10 @@ extension FavoriteViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let movieVM = favoritesVM.modelAt(indexPath.row)
-        if let imageData = movieVM.imageData {
-            let posterImage = UIImage(data: imageData)
-            cell.imageView.image = posterImage
-        }
+        let imageData = favoritesVM.posterAt(indexPath.row)
+        
+        let posterImage = UIImage(data: imageData)
+        cell.imageView.image = posterImage
         
         cell.layer.cornerRadius = 5
 
@@ -57,8 +56,8 @@ extension FavoriteViewController: UICollectionViewDelegate {
         
         guard let dvc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController else { return }
         
-        let movieVM = favoritesVM.modelAt(indexPath.row)
-        dvc.movieVM = movieVM
+        let movie = favoritesVM.modelAt(indexPath.row)
+        dvc.detailVM = DetailMovieViewModel(movie: movie)
         dvc.delegate = self
         dvc.fromFavoriteVC = true
 

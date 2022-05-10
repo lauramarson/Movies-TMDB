@@ -13,7 +13,7 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet var movieTitle: UILabel!
     @IBOutlet var releaseYear: UILabel!
     
-    var movieVM: MovieViewModel?
+    var movieCellVM: MovieCellViewModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,13 +21,13 @@ class MovieTableViewCell: UITableViewCell {
     }
 
     func configure() {
-        guard let movieVM = movieVM else { return }
+        guard let movieCellVM = movieCellVM else { return }
         
-        self.movieTitle.text = movieVM.title
+        self.movieTitle.text = movieCellVM.title
         
-        self.releaseYear.text = movieVM.releaseYear
+        self.releaseYear.text = movieCellVM.releaseYear
         
-        let imageURL = movieVM.imageURL
+        let imageURL = movieCellVM.imageURL
         let placeholderImage = UIImage(named: "imagePlaceholder")
 
         posterImage.sd_setImage(with: imageURL, placeholderImage: placeholderImage)

@@ -9,37 +9,50 @@ import Foundation
 
 class DetailMovieViewModel {
     var coreData: CoreData?
+    var movie: Movie
     
-    init() {
+    init(movie: Movie) {
         self.coreData = CoreData()
+        self.movie = movie
     }
     
-    func setFavorite(id: Int) -> Bool {
+    func setFavorite() -> Bool {
         
         guard let coreData = coreData else {
             fatalError("Fail to access Core Data.")
         }
         
-        return coreData.setFavorite(id: id)
+        return coreData.setFavorite(id: movie.id)
         
     }
     
-    func addFavorite(_ movieVM: MovieViewModel) {
+    func addFavorite() {
 
-        coreData?.addFavorite(movieVM.movie)
+        coreData?.addFavorite(movie)
     }
 
-    func removeFavorite(id: Int) {
+    func removeFavorite() {
 
-        coreData?.removeFavorite(id: id)
+        coreData?.removeFavorite(id: movie.id)
     }
     
     func saveChanges() {
         coreData?.saveChanges()
     }
     
-    func genreNames(movie: MovieViewModel) {
-        movie.movie.genre_names = coreData?.getGenreNames(ids: movie.genreIDs)
+    func genreNames() {
+        self.movie.genre_names = coreData?.getGenreNames(ids: movie.genre_ids)
+    }
+    
+}
+
+extension DetailMovieViewModel {
+    
+    func getPoster(completion: @escaping () -> ()) {
+        WebServices().fetchImage(posterPath: movie.poster_path) { [weak self] (data) in
+            self?.movie.image_data = data
+            completion()
+        }
     }
     
 }

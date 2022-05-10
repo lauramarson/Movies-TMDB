@@ -48,7 +48,7 @@ class ViewController: UITableViewController {
         }
         
         let movieModel = searchMoviesVM.modelAt(indexPath.row)
-        cell.movieVM = MovieViewModel(movieModel)
+        cell.movieCellVM = MovieCellViewModel(movieModel)
         
         cell.configure()
         
@@ -59,7 +59,7 @@ class ViewController: UITableViewController {
         guard let dvc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController else { return }
 
         let movieModel = searchMoviesVM.modelAt(indexPath.row)
-        dvc.movieVM = MovieViewModel(movieModel)
+        dvc.detailVM = DetailMovieViewModel(movie: movieModel)
 
         navigationController?.pushViewController(dvc, animated: true)
     }

@@ -22,7 +22,7 @@ class DetailViewController: UIViewController {
     
     weak var delegate: ReloadDataProtocol?
     
-    var movieVM: MovieViewModel?
+//    var movie: Movie
     var detailVM: DetailMovieViewModel?
     
     var fromFavoriteVC = false
@@ -37,7 +37,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        detailVM = DetailMovieViewModel()
+//        detailVM = DetailMovieViewModel()
         
         favButton.delegate = self
         
@@ -48,37 +48,38 @@ class DetailViewController: UIViewController {
     }
     
     func setComponents() {
-        guard let movieVM = movieVM else { return }
+//        guard let detailVM = detailVM else { return }
         
-        movieTitle.text = movieVM.title
+        movieTitle.text = detailVM?.movie.title
         
-        overview.text = movieVM.overview
+        overview.text = detailVM?.movie.overview
         overview.flashScrollIndicators()
         
-        if let imageData = movieVM.imageData {
+        if let imageData = detailVM?.movie.image_data {
             moviePoster.image = UIImage(data: imageData, scale:1)
             
         } else {
-            movieVM.getPoster(posterPath: movieVM.posterPath) { [weak self] (data) in
-                self?.moviePoster.image = UIImage(data: data, scale:1)
+            detailVM?.getPoster() { [weak self] in
+                guard let imageData = self?.detailVM?.movie.image_data else {return}
+                self?.moviePoster.image = UIImage(data: imageData, scale:1)
             }
             
         }
         
-        favorite = detailVM?.setFavorite(id: movieVM.id)
+        favorite = detailVM?.setFavorite()
         
         if fromFavoriteVC == false {
-            detailVM?.genreNames(movie: movieVM)
+            detailVM?.genreNames()
         }
         
         genresLabel.text = """
         Genres
-        \(movieVM.genres ?? "")
+        \(detailVM?.movie.genre_names ?? "")
         """
         
-        voteAverageLabel.text = "\(String(movieVM.voteAverage))/10"
+        voteAverageLabel.text = "\(String(detailVM?.movie.vote_average ?? 0))/10"
     
-        releaseYear.text = movieVM.releaseYear
+        releaseYear.text = detailVM?.movie.releaseYear
     }
     
     @objc func saveChanges() {
@@ -100,15 +101,14 @@ class DetailViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let movieVM = movieVM else { return }
-        favorite = detailVM?.setFavorite(id: movieVM.id)
+        favorite = detailVM?.setFavorite()
     }
 }
 
 extension DetailViewController: ActionDelegateProtocol {
     func buttonTapped() {
-        guard let favorite = favorite, let movieVM = movieVM else { return }
-        favorite ? detailVM?.removeFavorite(id: movieVM.id) : detailVM?.addFavorite(movieVM)
+        guard let favorite = favorite else { return }
+        favorite ? detailVM?.removeFavorite() : detailVM?.addFavorite()
 
         self.favorite = !favorite
     }

@@ -25,7 +25,7 @@ extension Movie {
     
     var imageURL: URL {
         guard let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(poster_path)") else {
-            fatalError("URL error")
+            return URL(fileURLWithPath: "")
         }
         return imageURL
     }
