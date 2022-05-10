@@ -13,21 +13,20 @@ class ViewController: UITableViewController {
     lazy var searchBar: UISearchBar = UISearchBar()
     var searchMoviesVM = SearchMoviesViewModel()
     var genresVM = GenresViewModel()
-    
-//    var genres = [Genre]() {
-//        didSet {
-//            saveGenres()
-//        }
-//    }
-    
-    var searchText = ""
-    var searching = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: "MovieTableViewCell", bundle: nil), forCellReuseIdentifier: "Movie")
         
+        setupSearchBar()
+
+        if genresVM.isFirstLaunch() {
+            genresVM.fetchGenres()
+        }
+    }
+    
+    func setupSearchBar() {
         searchBar.searchBarStyle = UISearchBar.Style.prominent
         searchBar.placeholder = " Search for a movie..."
         searchBar.sizeToFit()
@@ -37,14 +36,6 @@ class ViewController: UITableViewController {
         
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
-        
-        if genresVM.isFirstLaunch() {
-            genresVM.fetchGenres()
-        }
-//        guard isFirstLaunch else { return }
-//        fetchGenres()
-//
-//        print(genres)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,33 +63,10 @@ class ViewController: UITableViewController {
 
         navigationController?.pushViewController(dvc, animated: true)
     }
-    
-//    func saveGenres() {
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-//
-//        let managedContext = appDelegate.persistentContainer.viewContext
-//
-//        let entity = NSEntityDescription.entity(forEntityName: "MovieGenres", in: managedContext)!
-//
-//        for genre in genres { //TODO: for each
-//            let genreData = NSManagedObject(entity: entity, insertInto: managedContext)
-//
-//            genreData.setValue(genre.id, forKeyPath: "id")
-//            genreData.setValue(genre.name, forKeyPath: "name")
-//        }
-//
-//        do {
-//            try managedContext.save()
-//        } catch let error as NSError {
-//            print("Could not save. \(error), \(error.userInfo)")
-//        }
-//    }
-    
 }
 
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.searchText = searchText
         
         searchMoviesVM.searchForMovies(searchText: searchText) { [weak self] in
             DispatchQueue.main.async {
@@ -129,28 +97,3 @@ extension ViewController: UISearchBarDelegate {
     }
 
 }
-
-//
-//extension ViewController {
-//    var isFirstLaunch: Bool {
-//        let defaults = UserDefaults.standard
-//        
-//        guard defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil else {
-//            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
-//            return true
-//        }
-//        
-//        return false
-//        
-//        
-////        if let _ = defaults.string(forKey: "isAppAlreadyLaunchedOnce") {
-////            print("App already launched")
-////            return false
-////        } else {
-////            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
-////            print("App launched first time")
-////            return true
-////        }
-//    }
-//}
-

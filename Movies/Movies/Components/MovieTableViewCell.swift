@@ -19,11 +19,6 @@ class MovieTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        posterImage.image = UIImage(named: "imagePlaceholder")
-//    }
 
     func configure() {
         guard let movieVM = movieVM else { return }

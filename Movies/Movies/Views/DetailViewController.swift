@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ReloadDataProtocol: AnyObject {
-    func update(favorite: Bool, indexPath: Int)
+    func update()
 }
 
 class DetailViewController: UIViewController {
@@ -26,8 +26,6 @@ class DetailViewController: UIViewController {
     var detailVM: DetailMovieViewModel?
     
     var fromFavoriteVC = false
-//    var indexPath: Int?
-//    var imageData = Data()
     
     var favorite: Bool? {
         didSet {
@@ -35,12 +33,6 @@ class DetailViewController: UIViewController {
             favButton.favorite = favorite
         }
     }
-    
-//    var managedContext: NSManagedObjectContext? {
-//        (UIApplication.shared.delegate as? AppDelegate)?
-//            .persistentContainer
-//            .viewContext
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,14 +84,6 @@ class DetailViewController: UIViewController {
     @objc func saveChanges() {
         detailVM?.saveChanges()
     }
-//
-//    func setFavorite(id: Int) {
-//
-//        coreData?.setFavorite(id: id) { [weak self] (isFavorite) in
-//            self?.favorite = isFavorite
-//        }
-//
-//    }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -108,7 +92,7 @@ class DetailViewController: UIViewController {
             fromFavoriteVC = false
             guard let favorite = favorite, !favorite else { return }
             detailVM?.saveChanges()
-            self.delegate?.update(favorite: favorite, indexPath: 1)
+            self.delegate?.update()
         } else {
             detailVM?.saveChanges()
         }
@@ -128,32 +112,4 @@ extension DetailViewController: ActionDelegateProtocol {
 
         self.favorite = !favorite
     }
-
-//    func addFavorite() {
-//        guard let movieVM = movieVM else { return }
-//
-//        coreData?.addFavorite(movieVM)
-//    }
-//
-//    func removeFavorite() {
-//        guard let movieVM = movieVM else { return }
-//
-//        coreData?.removeFavorite(id: movieVM.id)
-//    }
 }
-
-//extension DetailViewController {
-//
-//    func genreNames() {
-//        guard let movieVM = movieVM else { return }
-//        
-//        coreData?.getGenreNames(ids: movieVM.genreIDs) { [weak self] (genreNames) in
-//            self?.movieVM?.genres = genreNames
-//        }
-//
-//    }
-//}
-
-
-
-

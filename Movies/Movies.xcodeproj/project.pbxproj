@@ -21,7 +21,7 @@
 		A471C6EE2829ACA2008B4DA1 /* GenresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A471C6ED2829ACA2008B4DA1 /* GenresViewModel.swift */; };
 		A4ACF59E27E25B0400E8F890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF59D27E25B0400E8F890 /* AppDelegate.swift */; };
 		A4ACF5A027E25B0400E8F890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF59F27E25B0400E8F890 /* SceneDelegate.swift */; };
-		A4ACF5A227E25B0400E8F890 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5A127E25B0400E8F890 /* ViewController.swift */; };
+		A4ACF5A227E25B0400E8F890 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5A127E25B0400E8F890 /* SearchViewController.swift */; };
 		A4ACF5A527E25B0400E8F890 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4ACF5A327E25B0400E8F890 /* Main.storyboard */; };
 		A4ACF5A827E25B0400E8F890 /* Movies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4ACF5A627E25B0400E8F890 /* Movies.xcdatamodeld */; };
 		A4ACF5AA27E25B0600E8F890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4ACF5A927E25B0600E8F890 /* Assets.xcassets */; };
@@ -53,7 +53,7 @@
 		A4ACF59A27E25B0400E8F890 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4ACF59D27E25B0400E8F890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4ACF59F27E25B0400E8F890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A4ACF5A127E25B0400E8F890 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A4ACF5A127E25B0400E8F890 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A4ACF5A427E25B0400E8F890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A4ACF5A727E25B0400E8F890 /* Movies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movies.xcdatamodel; sourceTree = "<group>"; };
 		A4ACF5A927E25B0600E8F890 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			children = (
 				A4ACF5C027E627C400E8F890 /* FavoriteViewController.swift */,
 				A4ACF5BE27E527EE00E8F890 /* DetailViewController.swift */,
-				A4ACF5A127E25B0400E8F890 /* ViewController.swift */,
+				A4ACF5A127E25B0400E8F890 /* SearchViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,12 +204,12 @@
 		A4ACF59C27E25B0400E8F890 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
-				A471C6E428219E3F008B4DA1 /* Services */,
-				A471C6E128219DD1008B4DA1 /* View Models */,
 				A4655C9727F66AC800203FEA /* Resources */,
 				A4655C9627F66A6500203FEA /* Extensions */,
 				A4655C9327F64FEA00203FEA /* Components */,
+				A471C6E428219E3F008B4DA1 /* Services */,
 				A4655C9027F64F8900203FEA /* Models */,
+				A471C6E128219DD1008B4DA1 /* View Models */,
 				A4655C8C27F64E9900203FEA /* Views */,
 				A4ACF59D27E25B0400E8F890 /* AppDelegate.swift */,
 				A4ACF59F27E25B0400E8F890 /* SceneDelegate.swift */,
@@ -345,7 +345,7 @@
 			files = (
 				A4ACF5BF27E527EE00E8F890 /* DetailViewController.swift in Sources */,
 				A4ACF5BB27E3D62400E8F890 /* Movies.swift in Sources */,
-				A4ACF5A227E25B0400E8F890 /* ViewController.swift in Sources */,
+				A4ACF5A227E25B0400E8F890 /* SearchViewController.swift in Sources */,
 				A4655C7F27EB7BAF00203FEA /* FavoriteButton.swift in Sources */,
 				A471C6EE2829ACA2008B4DA1 /* GenresViewModel.swift in Sources */,
 				A471C6E828254A9F008B4DA1 /* CoreData.swift in Sources */,
