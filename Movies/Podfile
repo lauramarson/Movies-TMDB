@@ -7,7 +7,6 @@ target 'Movies' do
 
   # Pods for Movies
   pod 'Alamofire', '~> 5.0'
-  pod 'KeychainSwift', '~> 20.0'
   pod 'SDWebImage', '~> 5.0'
 
 end
