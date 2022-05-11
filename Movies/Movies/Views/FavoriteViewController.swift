@@ -7,13 +7,13 @@
 
 import UIKit
 
-private let reuseIdentifier = "Favorite"
-
 class FavoriteViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
 
     var favoritesVM = FavoriteMoviesViewModel()
 
+    private let reuseIdentifier = "Favorite"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

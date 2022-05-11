@@ -8,40 +8,34 @@
 import Foundation
 
 class DetailMovieViewModel {
-    var coreData: CoreData?
+    var coreData: CoreData
     var movie: Movie
     
-    init(movie: Movie) {
-        self.coreData = CoreData()
+    init(movie: Movie, coreData: CoreData = CoreData()) {
+        self.coreData = coreData
         self.movie = movie
     }
     
     func setFavorite() -> Bool {
-        
-        guard let coreData = coreData else {
-            fatalError("Fail to access Core Data.")
-        }
-        
-        return coreData.setFavorite(id: movie.id)
-        
+        coreData.setFavorite(id: movie.id)
     }
     
     func addFavorite() {
 
-        coreData?.addFavorite(movie)
+        coreData.addFavorite(movie)
     }
 
     func removeFavorite() {
 
-        coreData?.removeFavorite(id: movie.id)
+        coreData.removeFavorite(id: movie.id)
     }
     
     func saveChanges() {
-        coreData?.saveChanges()
+        coreData.saveChanges()
     }
     
     func genreNames() {
-        self.movie.genre_names = coreData?.getGenreNames(ids: movie.genre_ids)
+        self.movie.genre_names = coreData.getGenreNames(ids: movie.genre_ids)
     }
     
 }

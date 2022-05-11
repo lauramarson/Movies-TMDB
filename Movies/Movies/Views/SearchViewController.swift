@@ -12,7 +12,6 @@ import UIKit
 class ViewController: UITableViewController {
     lazy var searchBar: UISearchBar = UISearchBar()
     var searchMoviesVM = SearchMoviesViewModel()
-    var genresVM = GenresViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +20,8 @@ class ViewController: UITableViewController {
         
         setupSearchBar()
 
-        if genresVM.isFirstLaunch() {
-            genresVM.fetchGenres()
+        if searchMoviesVM.isFirstLaunch {
+            searchMoviesVM.fetchGenres()
         }
     }
     

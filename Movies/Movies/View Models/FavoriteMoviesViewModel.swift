@@ -8,11 +8,11 @@
 import Foundation
 
 class FavoriteMoviesViewModel {
-    var coreData: CoreData?
+    var coreData: CoreData
     var favorites = [Movie]()
     
-    init() {
-        self.coreData = CoreData()
+    init(coreData: CoreData = CoreData()) {
+        self.coreData = coreData
         getFavoriteMovies()
     }
     
@@ -29,7 +29,7 @@ class FavoriteMoviesViewModel {
     }
     
     func getFavoriteMovies() {
-        coreData?.getFavoriteMovies() { [weak self] (movies) in
+        coreData.getFavoriteMovies() { [weak self] (movies) in
             self?.favorites = movies
         }
     }

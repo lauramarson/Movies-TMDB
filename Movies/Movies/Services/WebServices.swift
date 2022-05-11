@@ -72,8 +72,6 @@ extension WebServices {
             .responseDecodable(of: Genres.self) { (response) in
                 guard let genres = response.value else { return }
                 completion(genres.genres)
-//                self?.genres = genres.genres
-//                self?.saveGenres()
             }
     }
 }

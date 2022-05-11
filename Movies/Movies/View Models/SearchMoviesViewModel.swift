@@ -33,3 +33,22 @@ extension SearchMoviesViewModel {
         }
     }
 }
+
+extension SearchMoviesViewModel {
+    var isFirstLaunch: Bool {
+        let defaults = UserDefaults.standard
+        
+        guard defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil else {
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            return true
+        }
+        
+        return false
+    }
+    
+    func fetchGenres(webServices: WebServices = WebServices(), coreData: CoreData = CoreData()) {
+        WebServices().fetchGenres() { (result) in
+            CoreData().saveGenres(result)
+        }
+    }
+}
